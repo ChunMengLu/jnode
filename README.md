@@ -4,7 +4,7 @@
 ```
 https://console.appfog.com/
 ```
-# Install
+# git and import to eclipse
 ```
 git clone git://github.com/ChunMengLu/jnode.git
 ```
