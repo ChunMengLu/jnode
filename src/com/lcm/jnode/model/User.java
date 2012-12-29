@@ -1,5 +1,7 @@
 package com.lcm.jnode.model;
 
+import java.util.Date;
+
 import com.jfinal.plugin.activerecord.Model;
 
 /**
@@ -13,5 +15,17 @@ public class User extends Model<User>{
 	
 	public static final User dao = new User();
 
+	// 添加用户的统一处理
+	public void addUser(User user){
+		user.set("reg_time", new Date()).set("head_photo", "img/icon/user-64.png").set("create_time", new Date()).set("update_time", new Date()).save();
+	}
+	// 更新用户的统一处理
+	public void updateUser(User user){
+		user.set("update_time", new Date()).update();
+	}
 	
+	// 用户登录
+	public User login(String userName, String pwd){
+		return User.dao.findFirst("select * from user_info where email = ? and password =? and email_verify=1 and del_status = 0", userName, pwd);
+	}
 }

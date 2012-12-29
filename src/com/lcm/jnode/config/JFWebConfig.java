@@ -14,6 +14,8 @@ import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.lcm.jnode.controller.AdminController;
+import com.lcm.jnode.controller.BlogController;
 import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.UserController;
 import com.lcm.jnode.interceptor.CookieLoginInterceptor;
@@ -34,11 +36,10 @@ public class JFWebConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// 加载配置文件 静态到hashmap中
 		ConfigUtil.loadConfig(loadPropertyFile("config.properties"));
-		me.setDevMode(getPropertyToBoolean("devMode", false));
-		
+//		me.setDevMode(getPropertyToBoolean("devMode", false));
 		me.setError404View("/error/404.html");
 		me.setError500View("/error/500.html");
-		me.setBaseViewPath("/WEB-INF/pages/");
+		me.setBaseViewPath("WEB-INF/pages/");
 	}
 
 	/**
@@ -48,6 +49,9 @@ public class JFWebConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
+		me.add("/demo", UserController.class);
+		me.add("/blog", BlogController.class);
+		me.add("/admin", AdminController.class);
 	}
 
 	/**
@@ -56,7 +60,7 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 		// 更改为cookie登陆认证  并添加到 request中
-		me.add(new CookieLoginInterceptor());
+		// me.add(new CookieLoginInterceptor());
 	}
 
 	/**
@@ -85,7 +89,7 @@ public class JFWebConfig extends JFinalConfig {
 				StringBuffer jdbcUrl = new StringBuffer("jdbc:mysql://");
 				jdbcUrl.append(credentials.getString("host")).append(":")
 					.append(credentials.getString("port")).append("/")
-					.append(credentials.getString("name"))
+					.append(credentials.getString("name")).append("?")
 					.append("characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull");
 				
 				String userName = credentials.getString("username");

@@ -15,6 +15,7 @@ public class CookieLoginInterceptor implements Interceptor {
 		
 		System.out.println("secret：" + ConfigUtil.get("secret"));
 		
+		
 		// 检查是否有cookie
 		String userCookie = controller.getCookie("jnodeid");
 		if(StringKit.isBlank(userCookie)){

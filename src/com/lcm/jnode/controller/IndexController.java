@@ -58,8 +58,4 @@ public class IndexController extends Controller{
 			renderJson();
 		}
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(DigestUtils.md5Hex("6693722"));
-	}
 }

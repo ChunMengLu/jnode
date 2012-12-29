@@ -1,0 +1,49 @@
+<#macro header>
+<!--[if lte IE 7]>
+    <div class="error chromeframe">您正在使用<strong>漏洞百出</strong>的浏览器，为了安全，请升级您的浏览器 <a target="_blank" href="http://browsehappy.com">立即升级</a></div>
+<![endif]-->
+<header id="header">
+	<div class="inner">
+		<div id="logo">
+			<a href="index" class="tip-pop">
+			<img alt="segmentfault" src="img/logo.png"></a>
+		</div>
+		<!-- end #logo -->
+		<div id="dashboard">
+			<form id="search" action="search" method="post" style="position: relative;">
+				<label for="q" class="labelq">给我一个答案，我能改变世界</label> 
+				<input class="text-27 input-search placeholder" type="text" name="q" autocomplete="off" spellcheck="false" required="">
+			</form>
+		</div>
+		<!-- end #dashboard -->
+		<ul id="nav">
+			<li><a href="index">首页</a></li>
+			<#if (session.user)?? >
+				<li id="drop-link-wrap" class="has-sub">
+					<a id="drop-link" title="点击弹出下拉菜单" href="#">${session.user["login_name"]}</a>
+						<ul class="dropdown-menu hidden">
+							<li><a href='u/${session.user["id"]}'>我的主页</a></li>
+							<li><a href="user/settings">帐号设置</a></li>
+							<li><a href="user/logout">退出</a></li>
+							<li><a href="faq">帮助中心</a></li>
+						</ul>
+				</li>
+			<#else>
+				<li><a id="login-link" href="user/login">登录</a></li>
+				<li><a href="user/register">注册</a></li>
+			</#if>	
+		</ul>
+		<!-- end #nav -->
+	</div>
+</header>
+<!-- end header -->
+<#if setting_msg??>
+	<div id="msg-barStickyWrapper">
+		<div id="msg-bar" class="warn" style="width: 1349px;">
+			<div class="inner">
+				<a href="#" title="关闭" class="i-cancel msg-close right">✕</a>个人资料已经更新
+			</div>
+		</div>
+	</div>
+</#if>
+</#macro>

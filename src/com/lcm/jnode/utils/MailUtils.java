@@ -7,10 +7,10 @@ import org.apache.commons.mail.HtmlEmail;
 
 public class MailUtils {
 	
-	private static String HOST_NAME = "mails.pearlinpalm.com";
-	private static String SENDER = "techadmin";
-	private static String PASSWORD = "tech101122";
-	private static String from = "techadmin@pearlinpalm.com";
+	private static String HOST_NAME = "";
+	private static String SENDER = "";
+	private static String PASSWORD = "";
+	private static String from = "";
 	public static void config(Email email){
 		email.setHostName(HOST_NAME);
 		email.setAuthentication(SENDER, PASSWORD);

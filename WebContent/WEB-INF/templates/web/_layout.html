@@ -1,0 +1,41 @@
+<#include "_header.html"/>
+<#include "_meta.html"/>
+<#include "_footer.html"/>
+<#include "_script.html"/>
+<#macro layout title="我是默认title" csss=[] html=[] >
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<base href="${path}/">
+		<title>${title }</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<link href="css/style.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="css/responsive.css" media="screen" rel="stylesheet" type="text/css" />
+		<!--[if gt IE 8]>
+		   	<link rel="stylesheet" href="css/ie.css" />
+		<![endif]-->
+		<!--[if lte IE 8]>
+		    <script src="/js/html5.js"></script>
+		    <link rel="stylesheet" href="css/old-ie.css" />
+		<![endif]-->
+		<link href="images/icon/favicon.ico" rel="shortcut icon" type="image/x-icon">
+		<link rel="apple-touch-icon-precomposed" href="images/icon/sf-57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/icon/sf-72.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/icon/sf-114.png">
+		<#-- 后引入的 css file -->
+		<#list csss as file> 
+			<#include "${file}" />  		
+      	</#list>
+	</head>
+	<body>
+		<@header></@header>
+		<#nested>
+		<@footer></@footer>
+      	<@script></@script>
+		<#-- 后引入的 html js file -->
+		<#list html as file> 
+			<#include "${file}" />  		
+      	</#list>
+	</body>
+</html>
+</#macro>
