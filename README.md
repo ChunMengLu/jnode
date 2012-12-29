@@ -1,5 +1,9 @@
 # jnode
 采用的jfinal java web框架
+# demo掩饰地址：
+```
+http://jnode.hp.af.cm/
+```
 基于appfog云空间，详情请访问appfog官网：
 ```
 https://console.appfog.com/
