@@ -1,6 +1,6 @@
 # jnode
 采用的jfinal java web框架
-# demo掩饰地址：
+demo演示地址：
 ```
 http://jnode.hp.af.cm/
 ```
