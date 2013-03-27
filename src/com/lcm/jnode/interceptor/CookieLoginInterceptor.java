@@ -4,8 +4,8 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StringKit;
-import com.lcm.jnode.utils.AESDecrypt;
 import com.lcm.jnode.utils.ConfigUtil;
+import com.lcm.jnode.utils.DESUtil;
 
 public class CookieLoginInterceptor implements Interceptor {
 
@@ -15,7 +15,6 @@ public class CookieLoginInterceptor implements Interceptor {
 		
 		System.out.println("secret：" + ConfigUtil.get("secret"));
 		
-		
 		// 检查是否有cookie
 		String userCookie = controller.getCookie("jnodeid");
 		if(StringKit.isBlank(userCookie)){
@@ -23,7 +22,7 @@ public class CookieLoginInterceptor implements Interceptor {
 		}else{
 			// 解密校验cookie 
 			try {
-				String cookieString = AESDecrypt.decrypt(userCookie, ConfigUtil.get("secret"));
+				String cookieString = DESUtil.decrypt(userCookie, ConfigUtil.get("secret"));
 				// -------------------
 				// 将用户信息 传递到 request中
 				controller.setAttr("", "");

@@ -3,6 +3,8 @@ package com.lcm.jnode.config;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -12,7 +14,7 @@ import com.jfinal.config.Routes;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.c3p0.C3p0Plugin;
+import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.lcm.jnode.controller.AdminController;
 import com.lcm.jnode.controller.BlogController;
@@ -36,10 +38,10 @@ public class JFWebConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// 加载配置文件 静态到hashmap中
 		ConfigUtil.loadConfig(loadPropertyFile("config.properties"));
-//		me.setDevMode(getPropertyToBoolean("devMode", false));
+		me.setDevMode(getPropertyToBoolean("devMode", Boolean.parseBoolean(ConfigUtil.get("devMode"))));
+		me.setBaseViewPath("WEB-INF/pages/");
 		me.setError404View("/error/404.html");
 		me.setError500View("/error/500.html");
-		me.setBaseViewPath("WEB-INF/pages/");
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 		// 更改为cookie登陆认证  并添加到 request中
-		// me.add(new CookieLoginInterceptor());
+		me.add(new CookieLoginInterceptor());
 	}
 
 	/**
@@ -76,8 +78,8 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configPlugin(Plugins me) {
-		// 配置C3p0数据库连接池插件
-		C3p0Plugin c3p0Plugin = null;
+		// 配置Druid数据库连接池插件
+		DruidPlugin dp = null;
 		// appfog 数据库连接方式 https://docs.appfog.com/services/mysql
 		
 		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
@@ -95,23 +97,31 @@ public class JFWebConfig extends JFinalConfig {
 				String userName = credentials.getString("username");
 				String password = credentials.getString("password");
 				
-				c3p0Plugin = new C3p0Plugin(jdbcUrl.toString(), userName, password);
+				dp = new DruidPlugin(jdbcUrl.toString(), userName, password);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 		}else{
-			c3p0Plugin = new C3p0Plugin(getProperty("jdbcUrl"),getProperty("user"), getProperty("password"));
+			dp = new DruidPlugin(getProperty("jdbcUrl"),getProperty("user"), getProperty("password"));
 		} 
 		 
-		me.add(c3p0Plugin);
+		dp.addFilter(new StatFilter());
+		WallFilter wall = new WallFilter();
+		wall.setDbType("mysql");
+		dp.addFilter(wall);
+		me.add(dp);
 		
 		// 配置ActiveRecord插件
-		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
+		ActiveRecordPlugin arp = new ActiveRecordPlugin(dp).setShowSql(true);
 		me.add(arp);
 		
 		// 添加表匹配
 		arp.addMapping("user_info", User.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
+	}
+	
+	public static void main(String[] args) {		
+		com.jfinal.core.JFinal.start("WebContent", 8080, "/", 5);
 	}
 }

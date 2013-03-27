@@ -1,20 +1,6 @@
 package com.lcm.jnode.controller;
-
 import java.io.File;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.Crypt;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.jfinal.aop.Before;
@@ -28,6 +14,8 @@ public class IndexController extends Controller{
 
 	public void index() {
 		System.out.println(DigestUtils.md5Hex("123123"));
+		String[] str = {"1", "2"};
+		getParaMap().put("a", str);
 		
 		render("index.html");
 	}

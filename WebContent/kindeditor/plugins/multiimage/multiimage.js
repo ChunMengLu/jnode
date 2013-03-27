@@ -234,7 +234,10 @@ KindEditor.plugin('multiimage', function(K) {
 				}
 			},
 			beforeRemove : function() {
-				swfupload.remove();
+				// IE9 bugfix: https://github.com/kindsoft/kindeditor/issues/72
+				if (!K.IE || K.V <= 8) {
+					swfupload.remove();
+				}
 			}
 		}),
 		div = dialog.div;
@@ -1281,6 +1284,9 @@ SWFUpload.Console.writeLine = function (message) {
 	}
 };
 
+})();
+
+(function() {
 /*
 	Queue Plug-in
 

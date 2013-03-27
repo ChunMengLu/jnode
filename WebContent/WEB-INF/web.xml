@@ -14,16 +14,9 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- jfial end -->
-	
-	<error-page>
-	    <error-code>404</error-code>
-	    <location>/error/404.html</location>
-	</error-page>
-	<error-page>
-	    <error-code>500</error-code>
-	    <location>/error/500.html</location>
-	</error-page>
-	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 	<welcome-file-list>
 		<welcome-file>index</welcome-file>
 	</welcome-file-list>
