@@ -3,12 +3,9 @@
 
 demo演示地址：
 ```
-http://jnode.hp.af.cm/
+http://jnode.cloudfoundry.com/
 ```
-基于appfog云空间，详情请访问appfog官网：
-```
-https://console.appfog.com/
-```
+
 # git and import to eclipse
 ```
 git clone git://github.com/ChunMengLu/jnode.git
