@@ -19,6 +19,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.lcm.jnode.controller.AdminController;
 import com.lcm.jnode.controller.BlogController;
 import com.lcm.jnode.controller.IndexController;
+import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
 import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.model.User;
@@ -54,6 +55,7 @@ public class JFWebConfig extends JFinalConfig {
 		me.add("/demo", UserController.class);
 		me.add("/blog", BlogController.class);
 		me.add("/admin", AdminController.class);
+		me.add("/login", LoginController.class);
 	}
 
 	/**
@@ -62,7 +64,7 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 		// 更改为cookie登陆认证  并添加到 request中
-		me.add(new CookieLoginInterceptor());
+		// me.add(new CookieLoginInterceptor());
 	}
 
 	/**
@@ -116,7 +118,7 @@ public class JFWebConfig extends JFinalConfig {
 		me.add(arp);
 		
 		// 添加表匹配
-		arp.addMapping("user_info", User.class);
+		//arp.addMapping("user_info", User.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
 	}

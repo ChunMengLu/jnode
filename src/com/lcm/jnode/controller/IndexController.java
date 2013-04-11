@@ -7,6 +7,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.ext.render.CaptchaRender;
+import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 
 
@@ -38,12 +39,12 @@ public class IndexController extends Controller{
 			
 			setAttr("error", 0);
 			setAttr("url", "uploads/" + newName);
-			renderJson();
+			render(new JsonRender().forIE());
 		} catch (Exception e) {
 			e.printStackTrace();
 			setAttr("error", 1);
 			setAttr("message", "上传出错，请稍候再试！");
-			renderJson();
+			render(new JsonRender().forIE());
 		}
 	}
 }
