@@ -1,1 +1,14 @@
 .pagination
+    ul
+        if pagebean.page > 1
+            li.previous.current
+                a(href="?page=#{pagebean.page - 1}", title="上一页") &larr; 上一页
+        else
+            li.previous
+                span.currenttext &larr; 上一页
+        if pagebean.pageCount > pagebean.page
+            li.next.current
+                a(href="?page=#{pagebean.page + 1}", title="下一页") 下一页 &rarr;
+        else
+            li.next
+                span.currenttext 下一页 &rarr;

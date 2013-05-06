@@ -71,12 +71,11 @@ public class MailUtils {
 		try {
 			HtmlEmail mail = new HtmlEmail();
 			config(mail);
-			JadeTemplate template = Jade4J.getTemplate(PathKit.getWebRootPath() + "/WEB-INF/templates/" + tempname);
+			JadeTemplate template = Jade4J.getTemplate(PathKit.getWebRootPath() + "/WEB-INF/mail_template/" + tempname);
 			String html = Jade4J.render(template, model);
 			mail.addTo(meilTo);
 			mail.setSubject(subject);
 			mail.setMsg(html);
-			System.out.println(html);
 			mail.send();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -89,8 +88,9 @@ public class MailUtils {
 		for (int i = 1; i <= 100; i++) {
 			Map<String, Object> model = new HashMap<String, Object>();
 			model.put("user", "大黄");
-			model.put("count", i);
-			new MailUtils().sendTemplateEmail("大黄失恋了", "453871784@qq.com", model, "template.jade");
+			model.put("baseUrl", "http://dreamlu.net/");
+			model.put("verifyUrl", "http://dreamlu.net/");
+			new MailUtils().sendTemplateEmail("测试", "596392912@qq.com", model, "signup_send.jade");
 			try {
 				Thread.sleep(800);
 			} catch (InterruptedException e) {

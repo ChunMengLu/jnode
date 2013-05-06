@@ -55,7 +55,7 @@ public class DateUtil {
     @SuppressWarnings("unused")
     private static final SimpleDateFormat timeFormat = new SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss");
-
+    
     public DateUtil() {
     }
 
