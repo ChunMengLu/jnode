@@ -16,6 +16,7 @@ import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.render.ViewType;
 import com.lcm.jnode.controller.AdminController;
 import com.lcm.jnode.controller.BlogController;
 import com.lcm.jnode.controller.IndexController;
@@ -40,6 +41,7 @@ public class JFWebConfig extends JFinalConfig {
 		// 加载配置文件 静态到hashmap中
 		ConfigUtil.loadConfig(loadPropertyFile("config.properties"));
 		me.setDevMode(getPropertyToBoolean("devMode", Boolean.parseBoolean(ConfigUtil.get("devMode"))));
+		me.setViewType(ViewType.JADE);
 		me.setBaseViewPath("WEB-INF/pages/");
 		me.setError404View("/error/404.html");
 		me.setError500View("/error/500.html");
@@ -80,6 +82,7 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configPlugin(Plugins me) {
+		/*
 		// 配置Druid数据库连接池插件
 		DruidPlugin dp = null;
 		// appfog 数据库连接方式 https://docs.appfog.com/services/mysql
@@ -121,6 +124,8 @@ public class JFWebConfig extends JFinalConfig {
 		//arp.addMapping("user_info", User.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
+		
+		*/
 	}
 	
 	public static void main(String[] args) {		

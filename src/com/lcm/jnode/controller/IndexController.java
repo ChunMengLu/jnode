@@ -14,11 +14,11 @@ import com.jfinal.upload.UploadFile;
 public class IndexController extends Controller{
 
 	public void index() {
-		System.out.println(DigestUtils.md5Hex("123123"));
-		String[] str = {"1", "2"};
-		getParaMap().put("a", str);
+//		System.out.println(DigestUtils.md5Hex("123123"));
+//		String[] str = {"1", "2"};
+//		getParaMap().put("a", str);
 		
-		render("index.html");
+		render("index.jade");
 	}
 	
 	public void captcha(){

@@ -1,21 +1,36 @@
 package com.lcm.jnode.utils;
 
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import com.jfinal.kit.PathKit;
+
+import de.neuland.jade4j.Jade4J;
+import de.neuland.jade4j.template.JadeTemplate;
+
+/**
+ * 邮件发送帮助类
+ * @ClassName: MailUtils
+ * @author L.cm
+ * @date 2013-5-6 下午1:37:49
+ */
 public class MailUtils {
 	
-	private static String HOST_NAME = "";
-	private static String SENDER = "";
-	private static String PASSWORD = "";
-	private static String from = "";
+	private static String HOST_NAME = "smtp.126.com";
+	private static String USER = "q596392912";
+	private static String PASSWORD = "6693722";
+	private static String FROM = "q596392912@126.com";
 	public static void config(Email email){
 		email.setHostName(HOST_NAME);
-		email.setAuthentication(SENDER, PASSWORD);
+		email.setAuthentication(USER, PASSWORD);
 		try {
-			email.setFrom(from);
+			email.setFrom(FROM);
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
@@ -29,12 +44,58 @@ public class MailUtils {
 	 * @param receiver
 	 * @throws EmailException
 	 */
-	public static void sendSimpleEmail(String subject , String msg , String receiver) throws EmailException{
-		HtmlEmail email = new HtmlEmail();
-		config(email);
-		email.setSubject(subject);
-		email.addTo(receiver);
-		email.setMsg(msg);
-		email.send();
+	public static void sendSimpleEmail(String subject , String msg , String meilTo){
+		try {
+			HtmlEmail email = new HtmlEmail();
+			config(email);
+			email.setSubject(subject);
+			email.addTo(meilTo);
+			email.setMsg(msg);
+			email.send();
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 发送jade模板邮件
+	 * @Title: sendTemplateEmail
+	 * @param @param subject
+	 * @param @param meilTo
+	 * @param @param model
+	 * @param @param tempname    设定文件
+	 * @return void    返回类型
+	 * @throws
+	 */
+	public static void sendTemplateEmail(String subject, String meilTo, Map<String, Object> model, String tempname){
+		try {
+			HtmlEmail mail = new HtmlEmail();
+			config(mail);
+			JadeTemplate template = Jade4J.getTemplate(PathKit.getWebRootPath() + "/WEB-INF/templates/" + tempname);
+			String html = Jade4J.render(template, model);
+			mail.addTo(meilTo);
+			mail.setSubject(subject);
+			mail.setMsg(html);
+			System.out.println(html);
+			mail.send();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) throws IOException {
+		for (int i = 1; i <= 100; i++) {
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("user", "大黄");
+			model.put("count", i);
+			new MailUtils().sendTemplateEmail("大黄失恋了", "453871784@qq.com", model, "template.jade");
+			try {
+				Thread.sleep(800);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
