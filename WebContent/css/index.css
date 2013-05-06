@@ -1,0 +1,51 @@
+body {
+    background-color: #EBEBEB;
+}
+
+.nav-previous a:hover, .nav-next a:hover, #commentform input#submit, #searchform input[type="submit"], .home_menu_item, .secondary-navigation a:hover, .post-date-ribbon, .currenttext, .pagination a:hover, .readMore a, .mts-subscribe input[type="submit"] {
+    background-color: #EA141F;
+}
+
+#tabber .inside li .meta b, footer .widget li a:hover, .fn a, .reply a, #tabber .inside li div.info .entry-title a:hover, #navigation ul ul a:hover, .single_post a, a:hover, .textwidget a, #commentform a, #tabber .inside li a, .copyrights a:hover, a, .sidebar.c-4-12 a:hover, .top a:hover,#logo span {
+    color: #EA141F;
+}
+
+.corner {
+    border-color: transparent transparent #EA141F transparent;
+}
+
+.secondary-navigation, footer, .sidebar #searchform input[type="submit"]:hover, .readMore a:hover, #commentform input#submit:hover {
+    background-color: #364956;
+}
+#line{
+    background-color: #EA141F;
+    height: 5px;
+    width: 100%;
+    min-width: 1000px;
+}
+#ds-top-threads, #recent-posts {
+    padding: 6px 12px;
+}
+#ds-top-threads > li > a {
+    font-size: 13px;
+    margin-bottom: 0;
+    color: #919191 !important;
+}
+.backToTop {
+    width: 18px;
+    line-height: 1.2;
+    background-color: white;
+    color: gray;
+    padding: 8px 2px;
+    border: 1px dashed gray;
+    font-size: 12px;
+    text-align: center;
+    position: fixed;
+    _position: absolute;
+    right: 50px;
+    bottom: 100px;
+    _bottom: "auto";
+    cursor: pointer;
+    opacity: .6;
+    filter: Alpha(opacity=60)
+}
