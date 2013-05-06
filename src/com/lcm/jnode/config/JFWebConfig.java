@@ -23,6 +23,7 @@ import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
 import com.lcm.jnode.interceptor.CookieLoginInterceptor;
+import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.ConfigUtil;
 
@@ -43,8 +44,8 @@ public class JFWebConfig extends JFinalConfig {
 		me.setDevMode(getPropertyToBoolean("devMode", Boolean.parseBoolean(ConfigUtil.get("devMode"))));
 		me.setViewType(ViewType.JADE);
 		me.setBaseViewPath("WEB-INF/pages/");
-		me.setError404View("/error/404.html");
-		me.setError500View("/error/500.html");
+		me.setError404View("/error/404");
+		me.setError500View("/error/500");
 	}
 
 	/**
@@ -85,7 +86,6 @@ public class JFWebConfig extends JFinalConfig {
 		// 配置Druid数据库连接池插件
 		DruidPlugin dp = null;
 		// appfog 数据库连接方式 https://docs.appfog.com/services/mysql
-		
 		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
 		if(StringKit.notNull(VCAP_SERVICES)){
 			try {
@@ -120,7 +120,8 @@ public class JFWebConfig extends JFinalConfig {
 		me.add(arp);
 		
 		// 添加表匹配
-		//arp.addMapping("user_info", User.class);
+		arp.addMapping("user_info", User.class);
+		arp.addMapping("blog", Blog.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
 	}

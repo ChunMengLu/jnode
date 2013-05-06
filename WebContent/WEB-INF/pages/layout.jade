@@ -1,0 +1,35 @@
+!!! 5
+html.no-js(lang='en-US')
+    head
+        include common/_head
+    body#blog.home.blog.main.cat-32-id.cat-80-id
+        #line
+        include common/_header
+        .main-container
+            #page
+                .content
+                    // include common/_404
+                    article.article
+                        #content_box.home_page
+                            include common/_posts
+                            include common/_pagination
+                    aside.sidebar.c-4-12
+                        #sidebars.g
+                            .sidebar
+                                include common/_sidebar
+        include common/_footer
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src='/js/jquery-ui.min.js')
+    script(type='text/javascript', src='/js/modernizr.min.js')
+    script(type='text/javascript', src='/js/customscript.js')
+    script(type='text/javascript', src='/js/top.js')
+    script(type="text/javascript")
+        var duoshuoQuery = {short_name:"snode"};
+        (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = 'http://static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();

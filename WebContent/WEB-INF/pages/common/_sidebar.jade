@@ -1,0 +1,53 @@
+ul.sidebar_list
+  #tabber
+    ul.tabs
+      li
+        a.selected(href='http://demo.mythemeshop.com/ribbon/#popular-posts') 热门话题
+      li.tab-recent-posts
+        a(href='http://demo.mythemeshop.com/ribbon/#recent-posts') 最新博文
+    // end .tabs
+    .clear
+    .inside
+      #popular-posts(style='display: ;')
+        ul.ds-top-threads(data-range="weekly", data-num-items="5")
+      // end #popular-posts
+      #recent-posts(style='display: ;')
+        ul
+          li
+            .info
+              p.entry-title
+                a(title='Class Aptent Taciti Aociosqu Ad Litora Torquent Per', href='http://demo.mythemeshop.com/ribbon/2012/05/20/how-twitter-works-all-you-need-to-know-about-twitter/')
+                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+              .meta
+                span 2012年 5月 20日
+                span.ds-thread-count(data-thread-key="9", data-count-type="comments")
+              // end .entry-meta
+            // end .info
+            .clear
+      // end #recent-posts
+      .clear(style='display: none;')
+    // end .inside
+    .clear
+  // end #tabber
+  li.widget.widget-sidebar
+    form#searchform.search-form(method='post', action='/search', _lpchecked='1')
+      fieldset
+        input#s(type='text', name='s', value='搜索...', onblur='if (this.value == "") {this.value = "搜索...";}', onfocus='if (this.value == "搜索...") {this.value = "";}')
+        input(type='submit', value='好手氣', onclick='if(this.value=="搜索..."){this.value="";}')
+  li.widget.widget-sidebar
+    h3 最新回复：
+    ul.ds-recent-comments(data-num-items="10")
+  //li.widget.widget-sidebar
+  //  h3 友情社区：
+  //  .ad-125
+  //    ul
+  //      li.oddad
+  //        a(href='#')
+  //          img(src='/images/125x125.gif', width='125', height='125', alt='')
+  //      li.evenad
+  //        a(href='#')
+  //          img(src='/images/125x125.gif', width='125', height='125', alt='')
+  li.widget.widget-sidebar
+    h3 最近访客：
+    .ad-125
+        ul.ds-recent-visitors(data-num-items="14")

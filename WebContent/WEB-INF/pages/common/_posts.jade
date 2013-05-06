@@ -1,0 +1,29 @@
+each item in blogs
+    .post.excerpt
+        .post-date-ribbon
+            .corner
+            | #{item.update_time}
+        header
+            h2.title
+                a(href='/blog/#{item.id}', title='#{item.title}', rel='bookmark') #{item.title}
+            .post-info
+                .author_mt.hp_meta
+                    span.mt_icon
+                    if item.url
+                        a(href='#{item.url}', target="_blank", title='作者：#{item.nick_name}') #{item.nick_name}
+                    else
+                        | #{item.nick_name}
+                .cat_mt.hp_meta
+                    span.mt_icon
+                    a(href='/featured/', title='View all posts in featured') featured
+                    | ,
+                    a(href='/wellhead/', title='View all posts in wellhead') wellhead
+                .comment_mt.hp_meta
+                    span.mt_icon
+                    a(href='blog/#{item.id}#ds-thread', title='评论数')
+                        span.ds-thread-count(data-thread-key="#{item.id}", data-count-type="comments")
+        // .header
+        .post-content.image-caption-format-1 !{item.content}
+        .readMore
+            a(href='/blog/#{item.id}', title='#{item.title}', rel='more') 阅读全部
+    // .post excerpt

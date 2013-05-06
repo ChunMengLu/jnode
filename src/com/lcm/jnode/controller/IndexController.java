@@ -1,5 +1,6 @@
 package com.lcm.jnode.controller;
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -9,6 +10,7 @@ import com.jfinal.ext.interceptor.POST;
 import com.jfinal.ext.render.CaptchaRender;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
+import com.lcm.jnode.model.Blog;
 
 
 public class IndexController extends Controller{
@@ -18,7 +20,10 @@ public class IndexController extends Controller{
 //		String[] str = {"1", "2"};
 //		getParaMap().put("a", str);
 		
-		render("index.jade");
+		List<Blog> list = Blog.dao.find("SELECT b.id, b.title, b.content, b.update_time, u.nick_name, u.url FROM blog AS b ,user_info AS u WHERE b.user_id = u.id AND b.del_status = 0 AND u.del_status = 0 ORDER BY id DESC LIMIT 0, 5");
+		setAttr("title", "DreamLu");
+		setAttr("blogs", list);
+		render("index");
 	}
 	
 	public void captcha(){

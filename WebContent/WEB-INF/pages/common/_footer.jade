@@ -1,0 +1,53 @@
+footer
+    .container
+        //.footer-widgets
+            .f-widget.f-widget-1
+                .widget
+                    h3 Lorem ipsum
+                    .textwidget
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
+                        | malesuada, nibh quis egestas pellentesque, dui neque sagittis nisl, eget malesuada nunc felis
+                        | sed augue. Aenean tempor nibh sed diam elementum sollicitudin quis in metus. Praesent tincidunt
+            .f-widget.f-widget-2
+                .widget
+                    h3 Latest Tweets
+                    ul#twitter_update_list_667.tweets
+                        li
+                            p
+                    a.twitter-follow(href='http://twitter.com/mythemeshopteam') Follow on Twitter
+            .f-widget.last
+                .widget
+                    form#searchform.search-form(method='get', action='http://demo.mythemeshop.com/ribbon', _lpchecked='1')
+                        fieldset
+                            input#s(type='text', name='s', value='Search this site...', onblur='if (this.value == "") {this.value = "Search this site...";}', onfocus='if (this.value == "Search this site...") {this.value = "";}')
+                            input(type='submit', value='Search', onclick='if(this.value=="Search this Site...")this.value="";')
+                .widget
+                    h3 Recent Posts
+                    ul
+                        li
+                            a(href='http://demo.mythemeshop.com/ribbon/2012/05/20/how-twitter-works-all-you-need-to-know-about-twitter/', title='Class Aptent Taciti Aociosqu Ad Litora Torquent Per')
+                                | Class Aptent Taciti Aociosqu
+                                | Ad Litora Torquent Per
+                        li
+                            a(href='http://demo.mythemeshop.com/ribbon/2012/05/16/facebook-buys-lightbox-an-android-photo-sharing-app/', title='Eget Malesuada Nunc Delis Sed Augue Aenean')
+                                | Eget Malesuada Nunc Delis Sed Augue
+                                | Aenean
+        // .footer-widgets
+    .copyrights
+        // start copyrights
+        #copyright-note.row
+            span
+                a(href='https://github.com/ChunMengLu', title='GiHub地址') DreamLu
+                // | Copyright © 2013.
+            .top
+                a(href="http://nodejs.org", target="_blank", title="Node.js")
+                    img(alt="Node.js", src="http://nodejs.org/favicon.ico")
+                | &nbsp;&nbsp;
+                a(href="http://oschina.net", target="_blank", title="开源中国")
+                    img(alt="oschina.net", src="http://www.oschina.net/favicon.ico")
+                | &nbsp;&nbsp;
+                a(href="http://cnodejs.org", target="_blank", title="cnode社区")
+                    img(alt="cnodejs.org", src="http://www.cnodejs.org/favicon.ico")
+                //a.toplink(href='#top') Back to Top ↑
+    // end copyrights
+// footer
