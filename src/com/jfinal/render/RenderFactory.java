@@ -65,6 +65,7 @@ public class RenderFactory {
 		Render.init(constants.getEncoding(), constants.getDevMode());
 		initFreeMarkerRender(servletContext);
 		initFileRender(servletContext);
+		JadeRender.init();
 		
 		// create mainRenderFactory
 		if (mainRenderFactory == null) {
@@ -73,6 +74,8 @@ public class RenderFactory {
 				mainRenderFactory = new FreeMarkerRenderFactory();
 			else if (defaultViewType == ViewType.JSP)
 				mainRenderFactory = new JspRenderFactory();
+			else if (defaultViewType == ViewType.JADE)
+				mainRenderFactory = new JadeRenderFactory();
 			else
 				throw new RuntimeException("View Type can not be null.");
 		}
@@ -214,6 +217,15 @@ public class RenderFactory {
 		}
 		public String getViewExtension() {
 			return ".html";
+		}
+	}
+	
+	private static final class JadeRenderFactory implements IMainRenderFactory {
+		public Render getRender(String view) {
+			return new JadeRender(view);
+		}
+		public String getViewExtension() {
+			return ".jade";
 		}
 	}
 	
