@@ -1,8 +1,7 @@
-#Thu Dec 27 16:24:56 CST 2012
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/templates/web/_footer.html=UTF-8
 encoding//WebContent/WEB-INF/templates/web/_header.html=UTF-8
-encoding//WebContent/WEB-INF/templates/web/_kindeditor.html=UTF-8
+encoding//WebContent/WEB-INF/templates/web/_kindeditor.jade=UTF-8
 encoding//WebContent/WEB-INF/templates/web/_layout.html=UTF-8
 encoding//WebContent/WEB-INF/templates/web/_script.html=UTF-8
 encoding/<project>=UTF-8

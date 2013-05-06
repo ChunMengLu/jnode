@@ -74,7 +74,7 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new ContextPathHandler("path"));
+		// me.add(new ContextPathHandler("path"));
 	}
 	
 	/**
@@ -82,7 +82,6 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configPlugin(Plugins me) {
-		/*
 		// 配置Druid数据库连接池插件
 		DruidPlugin dp = null;
 		// appfog 数据库连接方式 https://docs.appfog.com/services/mysql
@@ -124,11 +123,9 @@ public class JFWebConfig extends JFinalConfig {
 		//arp.addMapping("user_info", User.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
-		
-		*/
 	}
 	
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		com.jfinal.core.JFinal.start("WebContent", 8080, "/", 5);
 	}
 }
