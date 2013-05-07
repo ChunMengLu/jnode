@@ -1,3 +1,12 @@
 extends layout
 
 block content
+    // include common/_404
+    article.article
+        #content_box.home_page
+            include common/_posts
+            include common/_pagination
+    aside.sidebar.c-4-12
+        #sidebars.g
+            .sidebar
+                include common/_sidebar

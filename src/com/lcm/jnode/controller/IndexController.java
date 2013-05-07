@@ -1,29 +1,33 @@
 package com.lcm.jnode.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.ext.render.CaptchaRender;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.utils.HtmlFilter;
 
-
+/**
+ * 首页
+ * @author L.cm
+ * @date 2013-5-7 上午9:42:21
+ */
 public class IndexController extends Controller{
 
 	public void index() {
-		List<Blog> list = Blog.dao.find("SELECT b.id, b.title, b.content, b.update_time, u.nick_name, u.url FROM blog AS b ,user_info AS u WHERE b.user_id = u.id AND b.del_status = 0 AND u.del_status = 0 ORDER BY id DESC LIMIT 0, 5");
-		for(Blog blog: list){
+	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6);
+		for(Blog blog: page.getList()){
 			String content = HtmlFilter.getText(blog.getStr("content"));
 			blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
-			//blog.set("update_time", new SimpleDateFormat("YYYY年 MM月 DD日").format(blog.getTimestamp("update_time")));
+			blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
 		}
 		setAttr("title", "DreamLu");
-		setAttr("blogs", list);
+		setAttr("blogPage", page);
 		render("index");
 	}
 	

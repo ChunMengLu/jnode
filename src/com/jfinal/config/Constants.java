@@ -43,7 +43,7 @@ final public class Constants {
 	private ViewType viewType = Const.DEFAULT_VIEW_TYPE;
 	private String jspViewExtension = Const.DEFAULT_JSP_EXTENSION;
 	private String freeMarkerViewExtension = Const.DEFAULT_FREE_MARKER_EXTENSION;
-	private String velocityViewExtension = Const.DEFAULT_VELOCITY_EXTENSION;
+	private String jadeViewExtension = Const.DEFAULT_JADE_EXTENSION;
 	private Integer maxPostSize = Const.DEFAULT_MAX_POST_SIZE;
 	private int freeMarkerTemplateUpdateDelay = Const.DEFAULT_FREEMARKER_TEMPLATE_UPDATE_DELAY;	// just for not devMode
 	
@@ -140,16 +140,16 @@ final public class Constants {
 		this.freeMarkerViewExtension = freeMarkerViewExtension.startsWith(".") ? freeMarkerViewExtension : "." + freeMarkerViewExtension;
 	}
 	
-	public String getVelocityViewExtension() {
-		return velocityViewExtension;
+	public String getJadeViewExtension() {
+		return jadeViewExtension;
 	}
 	
 	/**
-	 * Set Velocity view extension. The default value is ".vm"
-	 * @param velocityViewExtension the Velocity view extension
+	 * Set Jade view extension. The default value is ".jade"
+	 * @param jadeViewExtension the Jade view extension
 	 */
-	public void setVelocityViewExtension(String velocityViewExtension) {
-		this.velocityViewExtension = velocityViewExtension.startsWith(".") ? velocityViewExtension : "." + velocityViewExtension;
+	public void setJadeViewExtension(String velocityViewExtension) {
+		this.jadeViewExtension = jadeViewExtension.startsWith(".") ? jadeViewExtension : "." + jadeViewExtension;
 	}
 	
 	/**
@@ -316,10 +316,3 @@ final public class Constants {
 		RenderFactory.setErrorRenderFactory(errorRenderFactory);
 	}
 }
-
-
-
-
-
-
-

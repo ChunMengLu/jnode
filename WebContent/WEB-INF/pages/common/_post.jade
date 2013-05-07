@@ -1,0 +1,60 @@
+article.article
+    #content_box
+        #post-356.post-356.post.type-post.status-publish.format-standard.hentry.category-featured.category-wellhead.tag-social-media-2.g.post.cat-32-id.cat-80-id.has_thumb
+            .single_post
+                .post-date-ribbon
+                    .corner
+                    | #{blog.update_time}
+                .breadcrumb
+                    a(href="/", rel="nofollow") 首页
+                    | &nbsp;&nbsp;»&nbsp;&nbsp;
+                    a(href="/featured/", title="View all posts in featured", rel="nofollow") featured
+                    |•
+                    a(href="/wellhead/", title="View all posts in wellhead", rel="nofollow") wellhead
+                    | &nbsp;&nbsp;»&nbsp;&nbsp; #{blog.title}
+                header
+                    h1.title.single-title #{blog.title}
+                    span.theauthor.single-postmeta
+                        .author_mt.hp_meta
+                            span.mt_icon
+                            if blog.url
+                                a(href='#{blog.url}', target="_blank", title='作者：#{blog.nick_name}') #{blog.nick_name}
+                            else
+                                | #{blog.nick_name}
+                        .cat_mt.hp_meta
+                            span.mt_icon
+                            a(href='/featured/', title='View all posts in featured') featured
+                            | ,
+                            a(href='/wellhead/', title='View all posts in wellhead') wellhead
+                        .view_mt.hp_meta
+                            span.view_icon 
+                            | #{blog.view_count}
+                // .headline_area
+                .post-single-content.box.mark-links !{blog.content}
+            .postauthor
+                h4 关于作者
+                img.avatar.avatar-85.photo(alt="#{blog.nick_name}", src="#{blog.head_photo}", height="80", width="80")
+                h5 
+                    if blog.url
+                        a(href='#{blog.url}', target="_blank", title='作者：#{blog.nick_name}') #{blog.nick_name}
+                    else
+                        | #{blog.nick_name}
+                p #{blog.signature}
+            .related-posts
+                .postauthor-top
+                    h3 相关文章
+                ul
+                    li
+                        a.relatedthumb(href="", title="Bashet Pid Nassa Torttitor Nictumst Sc Aenean S Bort", rel="nofollow")
+                            span.rthumb
+                                img.attachment-related.wp-post-image(width="200", height="125", src="", alt="", title="")
+                            span.rp_title Bashet Pid Nassa Torttitor Nictumst Sc Aenean S Bort
+                    li.last
+                        a.relatedthumb(href="", title="Bashet Pid Nassa Torttitor Nictumst Sc Aenean S Bort", rel="nofollow")
+                            span.rthumb
+                                img.attachment-related.wp-post-image(width="200", height="125", src="", alt="", title="")
+                            span.rp_title Bashet Pid Nassa Torttitor Nictumst Sc Aenean S Bort
+        // post
+        #commentsAdd
+            // duoshuo  评论
+            .ds-thread(data-thread-key="#{blog.id}", data-title="#{blog.title}", data-category="snode", data-author-key="#{blog.user_id}")

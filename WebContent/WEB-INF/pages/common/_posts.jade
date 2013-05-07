@@ -1,4 +1,4 @@
-each item in blogs
+each item in blogPage.getList()
     .post.excerpt
         .post-date-ribbon
             .corner
@@ -18,9 +18,12 @@ each item in blogs
                     a(href='/featured/', title='View all posts in featured') featured
                     | ,
                     a(href='/wellhead/', title='View all posts in wellhead') wellhead
+                .view_mt.hp_meta
+                    span.view_icon 
+                    | #{item.view_count}
                 .comment_mt.hp_meta
                     span.mt_icon
-                    a(href='blog/#{item.id}#ds-thread', title='评论数')
+                    a(href='blog/#{item.id}#commentsAdd', title='评论数')
                         span.ds-thread-count(data-thread-key="#{item.id}", data-count-type="comments")
         // .header
         .post-content.image-caption-format-1 !{item.content}

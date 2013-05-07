@@ -11,7 +11,6 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
-import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -22,7 +21,6 @@ import com.lcm.jnode.controller.BlogController;
 import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
-import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.ConfigUtil;
@@ -30,7 +28,6 @@ import com.lcm.jnode.utils.ConfigUtil;
 /**
  * jfinal web config
  * @author chunmeng.lu
- *
  */
 public class JFWebConfig extends JFinalConfig {
 
@@ -41,11 +38,10 @@ public class JFWebConfig extends JFinalConfig {
 	public void configConstant(Constants me) {
 		// 加载配置文件 静态到hashmap中
 		ConfigUtil.loadConfig(loadPropertyFile("config.properties"));
-		me.setDevMode(getPropertyToBoolean("devMode", Boolean.parseBoolean(ConfigUtil.get("devMode"))));
 		me.setViewType(ViewType.JADE);
 		me.setBaseViewPath("WEB-INF/pages/");
-		me.setError404View("/error/404");
-		me.setError500View("/error/500");
+		me.setError404View("/WEB-INF/pages/error/404.jade");
+		me.setError500View("/WEB-INF/pages/error/500.jade");
 	}
 
 	/**
@@ -55,8 +51,7 @@ public class JFWebConfig extends JFinalConfig {
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
 		me.add("/user", UserController.class);
-		me.add("/demo", UserController.class);
-		me.add("/blog", BlogController.class);
+		me.add("/blog", BlogController.class, "/");
 		me.add("/admin", AdminController.class);
 		me.add("/login", LoginController.class);
 	}
@@ -124,9 +119,5 @@ public class JFWebConfig extends JFinalConfig {
 		arp.addMapping("blog", Blog.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
-	}
-	
-	public static void main(String[] args) {
-		com.jfinal.core.JFinal.start("WebContent", 8080, "/", 5);
 	}
 }

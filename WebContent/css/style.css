@@ -462,7 +462,7 @@ body > header {
 }
 .single-postmeta {
     clear: both;
-    float: left;
+    float: right;
     margin-bottom: 10px;
 }
 .home article header, .archive article header { margin-bottom: 15px }
@@ -496,6 +496,18 @@ article header {
 .comment_mt .mt_icon {
     width: 20px;
     background: url(images/meta.png) -38px 4px no-repeat;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+.view_mt .view_icon {
+    width: 20px;
+    background: url(images/meta.png) -78px 4px no-repeat;
+    margin-right: 7px;
+    margin-left: 10px;
+}
+.time_mt .time_icon {
+    width: 20px;
+    background: url(images/meta.png) -58px 2px no-repeat;
     margin-right: 7px;
     margin-left: 10px;
 }

@@ -11,14 +11,18 @@ html
         #msg_box
             .logo
                 h1 DreamLu
-            .title 抱歉，网站可能出现某些错误
+            .title 抱歉，您访问的页面没找到
             .msg 我们已经将此错误信息记录下来，并将尽快处理，为此造成您的不便请多见谅
             .nav
                 pre
                     |_____________
-                    |(&nbsp;&nbsp;<a href="javascript:history.go(-1);">返回上页</a>&nbsp;&nbsp;)
-                    |(&nbsp;&nbsp;<a href="http://snode.rs.af.cm/">返回首页</a>&nbsp;&nbsp;)
-                    |-------------
+                    |(&nbsp;&nbsp;
+                    a(href="javascript:history.go(-1);") 返回上页
+                    |&nbsp;&nbsp;)
+                    |(&nbsp;&nbsp;
+                    a(href="/") 返回首页
+                    |&nbsp;&nbsp;)
+                    |------------- 
                     |       O 
                     |        O   ^__^
                     |         o  (oo)_______

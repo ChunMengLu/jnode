@@ -1,13 +1,19 @@
 package com.lcm.jnode.controller;
 
+import java.text.SimpleDateFormat;
+
 import com.jfinal.core.Controller;
 import com.lcm.jnode.model.Blog;
 
 public class BlogController extends Controller{
+    
 	public void index() {
-		setAttr("page", Blog.dao.paginate(getParaToInt(0, 1), 10, "select *",
-				"from Blog order by id asc"));
-		render("BlogController.html");
+	    Blog blog = Blog.dao.findFallById(getParaToInt(0, 1));
+	    blog.set("view_count", blog.getInt("view_count") + 1).update();
+	    blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+	    setAttr("blog", blog);
+	    setAttr("title", blog.getStr("title"));
+	    render("blog");
 	}
 
 	public void add() {
@@ -15,7 +21,7 @@ public class BlogController extends Controller{
 
 	public void save() {
 		getModel(Blog.class).save();
-		forwardAction("/Blog");
+		forwardAction("/blog");
 	}
 
 	public void edit() {
@@ -24,11 +30,11 @@ public class BlogController extends Controller{
 
 	public void update() {
 		getModel(Blog.class).update();
-		forwardAction("/Blog");
+		forwardAction("/blog");
 	}
 
 	public void delete() {
 		Blog.dao.deleteById(getParaToInt());
-		forwardAction("/Blog");
+		forwardAction("/blog");
 	}
 }

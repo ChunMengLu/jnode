@@ -38,7 +38,7 @@ public interface Const {
 	
 	String DEFAULT_FREE_MARKER_EXTENSION = ".html";			// The original is ".ftl", Recommend ".html"
 	
-	String DEFAULT_VELOCITY_EXTENSION = ".vm";
+	String DEFAULT_JADE_EXTENSION = ".jade";
 	
 	// "WEB-INF/download" + File.separator maybe better otherwise it can be downloaded by browser directly
 	String DEFAULT_FILE_RENDER_BASE_PATH = File.separator + "download" + File.separator;
