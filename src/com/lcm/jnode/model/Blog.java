@@ -1,5 +1,7 @@
 package com.lcm.jnode.model;
 
+import java.util.List;
+
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -38,5 +40,16 @@ public class Blog extends Model<Blog> {
     public Blog findFallById(Integer blogId) {
         String sql = "SELECT b.*, u.nick_name, u.url, u.head_photo, u.signature FROM blog AS b ,user_info AS u WHERE b.id = ? AND b.user_id = u.id AND b.del_status = 0 AND u.del_status = 0";
         return dao.findFirst(sql, blogId);
+    }
+
+    /**
+     * 最近的5条
+     * @param @return    设定文件
+     * @return List<Blog>    返回类型
+     * @throws
+     */
+    public List<Blog> findLateList() {
+        String sql = "SELECT b.id, b.title, b.update_time FROM blog AS b WHERE b.del_status = 0 ORDER BY id DESC LIMIT 5";
+        return dao.find(sql);
     }
 }

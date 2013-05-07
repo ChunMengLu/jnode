@@ -13,17 +13,18 @@ ul.sidebar_list
       // end #popular-posts
       #recent-posts(style='display: none;')
         ul
-          li
-            .info
-              p.entry-title
-                a(title='Class Aptent Taciti Aociosqu Ad Litora Torquent Per', href='#')
-                  | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-              .meta
-                span 2012年 5月 20日
-                span.ds-thread-count(data-thread-key="9", data-count-type="comments")
-              // end .entry-meta
-            // end .info
-            .clear
+          each blog in lateBlogs
+            li
+                .info
+                  p.entry-title
+                    a(title='#{blog.title}', href='/blog/#{blog.id}') #{blog.title}
+                  .meta
+                    span #{blog.update_time}
+                    span -
+                    span.ds-thread-count(data-thread-key="#{blog.id}", data-count-type="comments")
+                  // end .entry-meta
+                // end .info
+                .clear
       // end #recent-posts
       .clear(style='display: none;')
     // end .inside

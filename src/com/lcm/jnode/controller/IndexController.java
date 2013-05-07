@@ -9,6 +9,7 @@ import com.jfinal.ext.render.CaptchaRender;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
+import com.lcm.jnode.interceptor.SidebarInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.utils.HtmlFilter;
 
@@ -17,6 +18,7 @@ import com.lcm.jnode.utils.HtmlFilter;
  * @author L.cm
  * @date 2013-5-7 上午9:42:21
  */
+@Before(SidebarInterceptor.class)
 public class IndexController extends Controller{
 
 	public void index() {
@@ -26,7 +28,6 @@ public class IndexController extends Controller{
 			blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
 			blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
 		}
-		setAttr("title", "DreamLu");
 		setAttr("blogPage", page);
 		render("index");
 	}

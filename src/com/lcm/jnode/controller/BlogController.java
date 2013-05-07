@@ -2,9 +2,12 @@ package com.lcm.jnode.controller;
 
 import java.text.SimpleDateFormat;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.lcm.jnode.interceptor.SidebarInterceptor;
 import com.lcm.jnode.model.Blog;
 
+@Before(SidebarInterceptor.class)
 public class BlogController extends Controller{
     
 	public void index() {
