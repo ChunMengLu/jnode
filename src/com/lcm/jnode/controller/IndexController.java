@@ -32,6 +32,20 @@ public class IndexController extends Controller{
 		render("index");
 	}
 	
+	
+	
+	
+	public void about() {
+	    render("about");
+	}
+	
+	
+	public void search() {
+	    
+	    render("about");
+	}
+	
+	
 	public void captcha(){
 		CaptchaRender captcha = new CaptchaRender("code"); 
 		render(captcha);

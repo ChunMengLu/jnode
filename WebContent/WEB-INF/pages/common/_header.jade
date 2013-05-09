@@ -3,15 +3,14 @@ header.main-header
         #header
             h1#logo
                 a(href='/')
-                    //img(src='/images/logo.png', alt='Ribbon')
                     | Dr
                     span ea
                     | mLu
             // END #logo
-            //.widget-header
+            .widget-header
                 .banner
                     .textwidget
-                        img(src='/images/103642-1335226181.png')
+                        img(src='/images/banner.png')
         // #header
         .secondary-navigation
             nav#navigation
@@ -24,8 +23,15 @@ header.main-header
                         a(href='/favorites') 收藏
                     li#menu-item-1288.menu-item.menu-item-type-taxonomy.menu-item-object-category.menu-item-1288
                         a(href='/tags') 标签
-                    li#menu-item-1289.menu-item.menu-item-type-taxonomy.menu-item-object-category.menu-item-1289
-                        a(href='/apply') 应用
+                    li#menu-item-1298.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-1298
+                        a.sf-with-ul(href="/games") 手机游戏
+                        ul.sub-menu.sf-js-enabled
+                            li#menu-item-1300.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-1300
+                                a(href="/games/news") 手游新闻
+                            li#menu-item-1303.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-1303
+                                a(href="/games/itunes") itunes排行
+                            li#menu-item-1301.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-1301
+                                a(href="/games/html5") html5游戏
                     li#menu-item-1290.menu-item.menu-item-type-taxonomy.menu-item-object-category.menu-item-1290
                         a(href='/about') 关于
                 select
@@ -34,6 +40,9 @@ header.main-header
                     option(value='/blogs') 文章
                     option(value='/favorites') 收藏
                     option(value='/tags') 标签
-                    option(value='/mobiles') 应用
+                    optgroup(label="手机游戏 »")
+                        option(value="/games/news") - 手游新闻
+                        option(value="/games/itunes") - itunes排行
+                        option(value="/games/html5") - html5游戏
                     option(value='/about') 关于
     // .container

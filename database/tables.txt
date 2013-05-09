@@ -1,0 +1,52 @@
+# table	blog		//blog
+id			
+title				// 标题
+content				// 内容
+user_id				// user id
+view_count			// 查看数
+del_status			// 是否删除 默认：0  删除：1 
+create_time			// 添加时间
+update_time			// 更新时间
+
+# table	blog_tags	// 博客tag
+id
+blog_id				// blog id
+tag_id				// tag id
+del_status			// 是否删除 默认：0  删除：1 
+create_time			// 添加时间
+update_time			// 更新时间
+
+# table mail_verify // 邮件校验
+id
+user_id				// 用户id
+verify_code			// 验证码
+del_status			// 是否删除 默认：0  删除：1 
+create_time			// 添加时间
+update_time			// 更新时间
+
+# table tags			// 标签
+id
+name				// tag名
+del_status			// 是否删除 默认：0  删除：1 
+create_time			// 添加时间
+update_time			// 更新时间
+
+# table user_info	// 用户表
+id
+nick_name			// 网名
+password 			// 密码
+email 				// 邮箱
+email_verify 		// 邮箱校验
+head_photo 			// 头像
+sex 				// 性别
+birthday 			// 生日
+status 				// 是否登录状态
+last_login_time 	// 最后登录时间
+signature 			// 个性签名
+url 				// 网站
+liveness 			// 活跃度
+contribution 		// 贡献
+authority 			// 权限     默认：0  vip：1  admin：2
+del_status			// 是否删除 默认：0  删除：1 
+create_time			// 添加时间
+update_time			// 更新时间	
