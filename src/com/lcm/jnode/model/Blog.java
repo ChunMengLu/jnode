@@ -1,7 +1,10 @@
 package com.lcm.jnode.model;
 
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Lists;
+import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -24,10 +27,22 @@ public class Blog extends Model<Blog> {
 	 * @return Page<Blog>    返回类型
 	 * @throws
 	 */
-    public Page<Blog> page(Integer pageNum, int pageSize) {
+    public Page<Blog> page(Integer pageNum, int pageSize, Map<String, Object> result) {
+        final List<Object> parameters = Lists.newArrayList();
         String select = "SELECT b.*, u.nick_name, u.url";
-        String sqlOutSelect = "FROM blog AS b ,user_info AS u WHERE b.user_id = u.id AND b.del_status = 0 AND u.del_status = 0 ORDER BY id DESC";
-        return dao.paginate(pageNum, pageSize, select, sqlOutSelect);
+        StringBuilder sqlOutSelect = new StringBuilder();
+        sqlOutSelect.append("FROM blog AS b ,user_info AS u WHERE b.user_id = u.id AND b.del_status = 0 AND u.del_status = 0");
+        if(StringKit.notNull(result.get("type"))) {
+            sqlOutSelect.append(" AND b.blog_type = ? ");
+            parameters.add(result.get("type"));
+        }
+        if(StringKit.notNull(result.get("s"))){
+            sqlOutSelect.append(" AND b.title like ? OR b.content like ? ");
+            parameters.add("%" + result.get("s") + "%");
+            parameters.add("%" + result.get("s") + "%");
+        }
+        sqlOutSelect.append(" ORDER BY id DESC");
+        return dao.paginate(pageNum, pageSize, select, sqlOutSelect.toString(), parameters.toArray());
     }
 
     /**

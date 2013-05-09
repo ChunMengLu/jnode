@@ -4,6 +4,9 @@ block content
     // include common/_404
     article.article
         #content_box.home_page
+            if postsby
+                h1.postsby
+                    span #{postsby}
             include common/_posts
             include common/_pagination
     aside.sidebar.c-4-12

@@ -1,0 +1,82 @@
+.navbar
+    .navbar-inner
+        ul.nav.pull-right
+            li
+                a.hidden-phone.visible-tablet.visible-desktop(href="#", role="button") Settings
+            li#fat-menu.dropdown
+                a.dropdown-toggle(href="#", role="button", data-toggle="dropdown")
+                    i.icon-user
+                    | Jack Smith
+                    i.icon-caret-down
+                ul.dropdown-menu
+                    li
+                        a(tabindex="-1", href="#") My Account
+                    li.divider
+                    li
+                        a.visible-phone(tabindex="-1", href="#") Settings
+                    li.divider.visible-phone
+                    li
+                        a(tabindex="-1", href="sign-in.html") Logout
+        a.brand(href="index.html")
+            span.first Dream
+            span.second Lu
+.sidebar-nav
+    form.search.form-inline
+        input(type="text", placeholder="Search...")
+
+    a.nav-header(href="#dashboard-menu", data-toggle="collapse")
+        i.icon-dashboard
+        | Dashboard
+    ul#dashboard-menu.nav.nav-list.collapse.in
+        li
+            a(href="index.html") Home
+        li
+            a(href="users.html") Sample List
+        li
+            a(href="user.html") Sample Item
+        li
+            a(href="media.html") Media
+        li
+            a(href="calendar.html") Calendar
+    a.nav-header(href="#accounts-menu", data-toggle="collapse")
+        i.icon-briefcase
+        | Account
+        span.label.label-info +3
+
+    ul#accounts-menu.nav.nav-list.collapse
+        li
+            a(href="sign-in.html") Sign In
+        li
+            a(href="sign-up.html") Sign Up
+        li
+            a(href="reset-password.html") Reset Password
+
+    a.nav-header.collapsed(href="#error-menu", data-toggle="collapse")
+        i.icon-exclamation-sign
+        | Error Pages
+        i.icon-chevron-up
+    ul#error-menu.nav.nav-list.collapse
+        li
+            a(href="403.html") 403 page
+        li
+            a(href="404.html") 404 page
+        li
+            a(href="500.html") 500 page
+        li
+            a(href="503.html") 503 page
+
+    a.nav-header(href="#legal-menu", data-toggle="collapse")
+        i.icon-legal
+        | Legal
+    ul#legal-menu.nav.nav-list.collapse
+        li
+            a(href="privacy-policy.html") Privacy Policy
+        li
+            a(href="terms-and-conditions.html") Terms and Conditions
+
+    a.nav-header(href="help.html")
+        i.icon-question-sign
+        | Help
+    a.nav-header(href="faq.html")
+        i.icon-comment
+        | Faq

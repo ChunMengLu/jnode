@@ -50,23 +50,18 @@ public class HtmlFilter {
 		return Jsoup.clean(html, wl.addTags(tags));
 	}
 	
-	// zyh 2012-06-12
-	public static String markKeywodsRedColor(String keywords, String target) {
+	// 对关键字加上颜色
+	public static String markKeywods (String keywords, String target) {
 		if (StringKit.notBlank(keywords)) {
 			String[] arr = keywords.split(" ");
 			for (String s : arr) {
 				if (StringKit.notBlank(s)) {
-					String temp = "<font color=\"red\">" + s + "</font>";
+					String temp = "<span class=\"highlight\">" + s + "</span>";
 					if(temp!=null)
 						target = target.replaceAll(s, temp);
 				}
 			}
 		}
 		return target;
-	}
-	
-	public static void main(String[] args) {
-		String test = "<a href='http://www.baidu.com' class='aaaa' style='width:800px; height:500px;' src='http://www.baidu.com.png'>aaa</a>";
-		System.out.println(clearTags(test, "a"));
 	}
 }

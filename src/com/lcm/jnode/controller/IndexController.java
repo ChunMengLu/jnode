@@ -1,16 +1,15 @@
 package com.lcm.jnode.controller;
-import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.jfinal.ext.interceptor.POST;
-import com.jfinal.ext.render.CaptchaRender;
+import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.render.JsonRender;
-import com.jfinal.upload.UploadFile;
 import com.lcm.jnode.interceptor.SidebarInterceptor;
 import com.lcm.jnode.model.Blog;
+import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.HtmlFilter;
 
 /**
@@ -21,55 +20,124 @@ import com.lcm.jnode.utils.HtmlFilter;
 @Before(SidebarInterceptor.class)
 public class IndexController extends Controller{
 
+    /**
+     * 首页
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
 	public void index() {
-	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6);
+	    Map<String, Object> result = Maps.newHashMap();
+        result.put("type", null);
+	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
 		for(Blog blog: page.getList()){
 			String content = HtmlFilter.getText(blog.getStr("content"));
 			blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
 			blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
 		}
+		setAttr("postsby", false);
 		setAttr("blogPage", page);
 		render("index");
 	}
 	
-	
-	
-	
-	public void about() {
-	    render("about");
+	/**
+	 * 文章
+	 * @param     设定文件
+	 * @return void    返回类型
+	 * @throws
+	 */
+	public void blogs() {
+	    Map<String, Object> result = Maps.newHashMap();
+	    result.put("type", 0);
+	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        for(Blog blog: page.getList()){
+            String content = HtmlFilter.getText(blog.getStr("content"));
+            blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
+            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+        }
+        setAttr("blogPage", page);
+        setAttr("postsby", "文章");
+        render("index");
 	}
 	
+	/**
+	 * 收藏
+	 * @param     设定文件
+	 * @return void    返回类型
+	 * @throws
+	 */
+	public void favorites() {
+	    Map<String, Object> result = Maps.newHashMap();
+        result.put("type", 1);
+        Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        for(Blog blog: page.getList()){
+            String content = HtmlFilter.getText(blog.getStr("content"));
+            blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
+            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+        }
+        setAttr("blogPage", page);
+        setAttr("postsby", "收藏");
+        render("index");
+	}
 	
+	/**
+	 * 搜索
+	 * @param     设定文件
+	 * @return void    返回类型
+	 * @throws
+	 */
 	public void search() {
-	    
-	    render("about");
+	    Map<String, Object> result = Maps.newHashMap();
+        result.put("s", getPara("s"));
+	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        for(Blog blog: page.getList()){
+            String content = HtmlFilter.getText(blog.getStr("content"));
+            content = content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content;
+            blog.set("title",  HtmlFilter.markKeywods(getPara("s"), blog.getStr("title")));
+            blog.set("content",  HtmlFilter.markKeywods(getPara("s"), content));
+            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            
+        }
+        setAttr("blogPage", page);
+	    setAttr("postsby", "搜索");
+	    render("index");
 	}
 	
-	
-	public void captcha(){
-		CaptchaRender captcha = new CaptchaRender("code"); 
-		render(captcha);
-	}
-	
-	@Before(POST.class)
-	public void upload(){
-		String path = getRequest().getRealPath("/");
-		try {
-			UploadFile file = getFile("imgFile", path + "/uploads" , 1024 * 1024);
-			File oldFile = file.getFile();
-			String oldName = file.getFileName();
-			// 更名
-			String newName = System.currentTimeMillis() + oldName.substring(oldName.lastIndexOf("."), oldName.length());
-			oldFile.renameTo(new File(oldFile.getParent() + "/" + newName));
-			
-			setAttr("error", 0);
-			setAttr("url", "uploads/" + newName);
-			render(new JsonRender().forIE());
-		} catch (Exception e) {
-			e.printStackTrace();
-			setAttr("error", 1);
-			setAttr("message", "上传出错，请稍候再试！");
-			render(new JsonRender().forIE());
-		}
-	}
+	/**
+     * 关于
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void about() {
+        
+        render("about");
+    }
+    
+    /**
+     * 登录
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void sign_in() {
+        User user = getSessionAttr("user");
+        if(StringKit.notNull(user)) {
+            redirect("/admin");
+        }else {
+            render("admin/sign-in");
+        }
+    }
+    
+    /**
+     * 登出
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void logout() {
+        removeCookie("userId");
+        removeSessionAttr("user");
+        redirect("sign_in");
+    }
 }

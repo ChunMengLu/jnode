@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .navbar
+        .navbar-inner
+            a.brand(href="index.html")
+                span.first Dream
+                span.second Lu
+    .row-fluid
+        .dialog
+            .block
+                p.block-heading 登录
+                .block-body
+                    form(action="/admin/session", method="post")
+                        label 邮箱帐号：
+                        input.span12(type="text", name="email", required="required")
+                        label 密码：
+                        input.span12(type="password", name="pwd", required="required")
+                        input.btn.btn-primary.pull-right(type="submit", value="登录")
+                        label.remember-me
+                            input(type="checkbox", name="remember", value="1")
+                            | &nbsp;记住密码
+                        .clearfix
+            p.pull-right
+                a(href="reset-password.html") 忘了密码？

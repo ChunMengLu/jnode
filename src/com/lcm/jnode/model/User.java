@@ -25,7 +25,7 @@ public class User extends Model<User>{
 	}
 	
 	// 用户登录
-	public User login(String userName, String pwd){
-		return User.dao.findFirst("select * from user_info where email = ? and password =? and email_verify=1 and del_status = 0", userName, pwd);
+	public User login(String email, String pwd){
+		return User.dao.findFirst("select * from user_info where email = ? and password = ? and email_verify = 1 and del_status = 0", email, pwd);
 	}
 }

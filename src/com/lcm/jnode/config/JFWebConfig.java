@@ -21,6 +21,7 @@ import com.lcm.jnode.controller.BlogController;
 import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
+import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.interceptor.SeoInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
@@ -51,9 +52,10 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configRoute(Routes me) {
 		me.add("/", IndexController.class);
-		me.add("/user", UserController.class);
 		me.add("/blog", BlogController.class, "/");
-		me.add("/admin", AdminController.class);
+		me.add("/user", UserController.class, "/admin");
+		me.add("/admin", AdminController.class, "/admin");
+		// 第三方登录
 		me.add("/login", LoginController.class);
 	}
 
@@ -62,8 +64,7 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configInterceptor(Interceptors me) {
-		// 更改为cookie登陆认证  并添加到 request中
-		// me.add(new CookieLoginInterceptor());
+	    me.add(new CookieLoginInterceptor());
 	    me.add(new SeoInterceptor());
 	}
 
