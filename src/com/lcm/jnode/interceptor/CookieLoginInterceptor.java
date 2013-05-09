@@ -26,7 +26,7 @@ public class CookieLoginInterceptor implements Interceptor {
                 try {
                     // 解密校验cookie 
                     String cookieString = new DESUtils().decryptString(userCookie);
-                    if(cookieString.indexOf("|") != -1) {
+                    if(cookieString.indexOf(":") != -1) {
                         String[] data = cookieString.split(":");
                         User user = User.dao.login(data[0], data[1]);
                         controller.setSessionAttr("user", user);
