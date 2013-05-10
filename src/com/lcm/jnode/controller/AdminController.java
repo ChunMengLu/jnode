@@ -14,7 +14,6 @@ import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.lcm.jnode.interceptor.AdminInterceptor;
-import com.lcm.jnode.model.Admin;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.DESUtils;
@@ -58,24 +57,6 @@ public class AdminController extends Controller{
         renderJson(new String[]{"status"});
     }
 
-    public void save() {
-        getModel(Admin.class).save();
-        forwardAction("/Admin");
-    }
-
-    public void edit() {
-        setAttr("Admin", Admin.dao.findById(getParaToInt()));
-    }
-
-    public void update() {
-        getModel(Admin.class).update();
-        forwardAction("/Admin");
-    }
-
-    public void delete() {
-        Admin.dao.deleteById(getParaToInt());
-        forwardAction("/Admin");
-    }
     
     @Before(POST.class)
     public void editor(){

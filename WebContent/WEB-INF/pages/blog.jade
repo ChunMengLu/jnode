@@ -9,3 +9,14 @@ block content
         #sidebars.g
             .sidebar
                 include common/_sidebar
+
+block script
+    script type="text/javascript">
+        var wumiiPermaLink = "http://jnode.cloudfoundry.com/blog/#{blog.id}"; //请用代码生成文章永久的链接
+        var wumiiTitle = "#{blog.title}"; //请用代码生成文章标题
+        var wumiiTags = "nodejs, coffee-script, java"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+        var wumiiSitePrefix = "http://jnode.cloudfoundry.com/";
+        var wumiiParams = "&num=5&mode=2&pf=Jnode";
+    script(type="text/javascript", src="http://widget.wumii.com/ext/relatedItemsWidget")
+    a(href="http://www.wumii.com/widget/relatedItems", style="border:0;")
+        img(src="http://static.wumii.cn/images/pixel.png", alt="无觅相关文章插件，快速提升流量", style="border:0;padding:0;margin:0;")
