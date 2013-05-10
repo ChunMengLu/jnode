@@ -38,7 +38,7 @@ public class JadeRender extends Render {
 		TemplateLoader loader = new FileTemplateLoader(PathKit.getWebRootPath(), encoding);
 		config.setTemplateLoader(loader);
 		config.setPrettyPrint(true);
-		config.setCaching(false);
+		config.setCaching(true);
 	}
 	
 	public void render() {
