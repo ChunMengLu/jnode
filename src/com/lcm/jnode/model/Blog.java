@@ -67,4 +67,15 @@ public class Blog extends Model<Blog> {
         String sql = "SELECT b.id, b.title, b.update_time FROM blog AS b WHERE b.del_status = 0 ORDER BY id DESC LIMIT 5";
         return dao.find(sql);
     }
+
+    /**
+     * 返回所有的未删除的博文
+     * @param @return    设定文件
+     * @return List<Blog>    返回类型
+     * @throws
+     */
+    public List<Blog> find4github() {
+        String sql = "SELECT b.* FROM blog AS b WHERE b.del_status = 0 ORDER BY id DESC";
+        return dao.find(sql);
+    }
 }

@@ -2,6 +2,7 @@
 html
     head
         include ../common/_admin_head
+        block meta
     | <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
     | <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
     | <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
@@ -11,3 +12,4 @@ html
     | <!--<![endif]-->
     block content
     include ../common/_admin_script
+    block script

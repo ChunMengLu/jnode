@@ -1,10 +1,12 @@
 package com.lcm.jnode.controller;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.lcm.jnode.interceptor.SidebarInterceptor;
@@ -139,5 +141,17 @@ public class IndexController extends Controller{
         removeCookie("userId");
         removeSessionAttr("user");
         redirect("sign_in");
+    }
+    
+    /**
+     * 提供给github pages jsonp跨域使用
+     * @url         http://dreamlu.net/
+     * @param       设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void json() {
+        List<Blog> blogs = Blog.dao.find4github();
+        renderJavascript(getPara("callback") + "(" + JsonKit.listToJson(blogs, 2) + ")");
     }
 }

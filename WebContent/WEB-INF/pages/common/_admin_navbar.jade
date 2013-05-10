@@ -2,45 +2,45 @@
     .navbar-inner
         ul.nav.pull-right
             li
-                a.hidden-phone.visible-tablet.visible-desktop(href="#", role="button") Settings
+                a.hidden-phone.visible-tablet.visible-desktop(href="#", role="button") 设置
             li#fat-menu.dropdown
                 a.dropdown-toggle(href="#", role="button", data-toggle="dropdown")
                     i.icon-user
-                    | Jack Smith
+                    | #{user.nick_name }
                     i.icon-caret-down
                 ul.dropdown-menu
                     li
-                        a(tabindex="-1", href="#") My Account
+                        a(tabindex="-1", href="#") 用户中心
                     li.divider
                     li
-                        a.visible-phone(tabindex="-1", href="#") Settings
+                        a.visible-phone(tabindex="-1", href="#") 设置
                     li.divider.visible-phone
                     li
-                        a(tabindex="-1", href="sign-in.html") Logout
-        a.brand(href="index.html")
+                        a(tabindex="-1", href="/logout") 退出
+        a.brand(href="/")
             span.first Dream
             span.second Lu
 .sidebar-nav
     form.search.form-inline
-        input(type="text", placeholder="Search...")
+        input(type="text", placeholder="搜索...")
 
     a.nav-header(href="#dashboard-menu", data-toggle="collapse")
         i.icon-dashboard
-        | Dashboard
+        | 博文管理
     ul#dashboard-menu.nav.nav-list.collapse.in
         li
-            a(href="index.html") Home
+            a(href="/admin/blogs") 列表
         li
-            a(href="users.html") Sample List
+            a(href="/admin/blogs/add") 添加
         li
-            a(href="user.html") Sample Item
+            a(href="/admin/blogs/edit") 修改
         li
             a(href="media.html") Media
         li
             a(href="calendar.html") Calendar
     a.nav-header(href="#accounts-menu", data-toggle="collapse")
         i.icon-briefcase
-        | Account
+        | 用户管理
         span.label.label-info +3
 
     ul#accounts-menu.nav.nav-list.collapse
@@ -53,7 +53,7 @@
 
     a.nav-header.collapsed(href="#error-menu", data-toggle="collapse")
         i.icon-exclamation-sign
-        | Error Pages
+        | 标签管理
         i.icon-chevron-up
     ul#error-menu.nav.nav-list.collapse
         li
@@ -76,7 +76,7 @@
 
     a.nav-header(href="help.html")
         i.icon-question-sign
-        | Help
+        | 帮助
     a.nav-header(href="faq.html")
         i.icon-comment
         | Faq

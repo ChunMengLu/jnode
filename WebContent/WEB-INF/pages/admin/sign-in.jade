@@ -1,9 +1,12 @@
 extends layout
 
+block meta
+    link(rel="stylesheet", href="lib/artDialog/skins/default.css")
+
 block content
     .navbar
         .navbar-inner
-            a.brand(href="index.html")
+            a.brand(href="/")
                 span.first Dream
                 span.second Lu
     .row-fluid
@@ -23,3 +26,25 @@ block content
                         .clearfix
             p.pull-right
                 a(href="reset-password.html") 忘了密码？
+
+block script
+    script(src="/lib/artDialog/jquery.artDialog.js")
+    script
+        $(function(){
+            $('form').submit(function(){
+                var dialog = art.dialog();
+                $.post($(this).attr("action")
+                    , {email: $('input[name="email"]').val(), pwd: $('input[name="pwd"]').val()}
+                    , function (data){
+                        if(data.status === 0) {
+                            dialog.content('登录成功！').time(1);
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            dialog.content('登录失败，请检查用户名和密码！').time(2);
+                        }
+                });
+                return false;
+            });
+        })
