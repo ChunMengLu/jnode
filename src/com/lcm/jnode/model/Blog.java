@@ -41,7 +41,7 @@ public class Blog extends Model<Blog> {
             parameters.add("%" + result.get("s") + "%");
             parameters.add("%" + result.get("s") + "%");
         }
-        sqlOutSelect.append(" ORDER BY id DESC");
+        sqlOutSelect.append(" ORDER BY b.id DESC");
         return dao.paginate(pageNum, pageSize, select, sqlOutSelect.toString(), parameters.toArray());
     }
 
@@ -75,7 +75,21 @@ public class Blog extends Model<Blog> {
      * @throws
      */
     public List<Blog> find4github() {
-        String sql = "SELECT b.* FROM blog AS b WHERE b.del_status = 0 ORDER BY id DESC";
+        String sql = "SELECT b.* FROM blog AS b WHERE b.del_status = 0 ORDER BY b.id DESC";
         return dao.find(sql);
+    }
+
+    /**
+     * 管理后台分页
+     * @param @param paraToInt
+     * @param @param i
+     * @param @return    设定文件
+     * @return Page<Blog>    返回类型
+     * @throws
+     */
+    public Page<Blog> adminPage(Integer pageNum, int pageSize) {
+        String select = "SELECT b.*, u.nick_name";
+        String sqlOutSelect = "FROM blog AS b ,user_info AS u ORDER BY b.id DESC";
+        return dao.paginate(pageNum, pageSize, select, sqlOutSelect.toString());
     }
 }
