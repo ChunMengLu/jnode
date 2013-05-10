@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50162
 File Encoding         : 65001
 
-Date: 2013-05-10 16:22:50
+Date: 2013-05-10 17:05:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,6 +66,24 @@ CREATE TABLE `blog_tags` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for blog_type
+-- ----------------------------
+DROP TABLE IF EXISTS `blog_type`;
+CREATE TABLE `blog_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(50) DEFAULT NULL,
+  `sort_id` int(2) DEFAULT '0',
+  `del_status` int(1) DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of blog_type
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for mail_verify
 -- ----------------------------
 DROP TABLE IF EXISTS `mail_verify`;
@@ -90,7 +108,7 @@ CREATE TABLE `mail_verify` (
 DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
+  `tag_name` varchar(50) DEFAULT NULL,
   `del_status` int(1) DEFAULT '0',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
