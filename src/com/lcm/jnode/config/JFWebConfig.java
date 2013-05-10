@@ -11,6 +11,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.core.JFinal;
 import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -122,4 +123,11 @@ public class JFWebConfig extends JFinalConfig {
 		// 添加EhCache
 		me.add(new EhCachePlugin());
 	}
+	
+	/**
+     * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此
+     */
+    public static void main(String[] args) {
+        JFinal.start("WebContent", 80, "/", 5);
+    }
 }

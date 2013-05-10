@@ -1,73 +1,86 @@
 package com.lcm.jnode.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.google.common.collect.Maps;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.StringKit;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.lcm.jnode.interceptor.AdminInterceptor;
 import com.lcm.jnode.model.Admin;
+import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.DESUtils;
 
 @Before(AdminInterceptor.class)
 public class AdminController extends Controller{
-	
+    
     public void index() {
-		
-	}
+        Map<String, Object> result = Maps.newHashMap();
+        Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        for(Blog blog: page.getList()){
+            String title = blog.getStr("title");
+            blog.set("title", title != null && title.length() > 40 ? title.substring(0, 37) + "..." : title );
+            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+        }
+        setAttr("blogPage", page);
+        render("index");
+    }
 
-	/**
-	 * 登录
-	 * @param     设定文件
-	 * @return void    返回类型
-	 * @throws
-	 */
-	@ClearInterceptor
-	public void session() {
-	    String email = getPara("email", "");
-	    String pwd = getPara("pwd", "");
-	    Integer remember = getParaToInt("remember", 0);
-	    User user = User.dao.login(email, DigestUtils.md5Hex(pwd));
-	    if(StringKit.notNull(user)) {
-	        if(remember == 1){
-	            String code = new DESUtils().encryptString(email + ":" + DigestUtils.md5Hex(pwd));
-	            setCookie("userId", code, 1000 * 60 * 60 * 24 * 30, "/");
-	        }
-	        setSessionAttr("user", user);
-	        setAttr("status", 0);
-	    }else {
-	        setAttr("status", 1);
-	    }
-	    renderJson(new String[]{"status"});
-	}
+    /**
+     * 登录
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    @ClearInterceptor
+    public void session() {
+        String email = getPara("email", "");
+        String pwd = getPara("pwd", "");
+        Integer remember = getParaToInt("remember", 0);
+        User user = User.dao.login(email, DigestUtils.md5Hex(pwd));
+        if(StringKit.notNull(user)) {
+            if(remember == 1){
+                String code = new DESUtils().encryptString(email + ":" + DigestUtils.md5Hex(pwd));
+                setCookie("userId", code, 1000 * 60 * 60 * 24 * 30, "/");
+            }
+            setSessionAttr("user", user);
+            setAttr("status", 0);
+        }else {
+            setAttr("status", 1);
+        }
+        renderJson(new String[]{"status"});
+    }
 
-	public void save() {
-		getModel(Admin.class).save();
-		forwardAction("/Admin");
-	}
+    public void save() {
+        getModel(Admin.class).save();
+        forwardAction("/Admin");
+    }
 
-	public void edit() {
-		setAttr("Admin", Admin.dao.findById(getParaToInt()));
-	}
+    public void edit() {
+        setAttr("Admin", Admin.dao.findById(getParaToInt()));
+    }
 
-	public void update() {
-		getModel(Admin.class).update();
-		forwardAction("/Admin");
-	}
+    public void update() {
+        getModel(Admin.class).update();
+        forwardAction("/Admin");
+    }
 
-	public void delete() {
-		Admin.dao.deleteById(getParaToInt());
-		forwardAction("/Admin");
-	}
-	
-	@Before(POST.class)
+    public void delete() {
+        Admin.dao.deleteById(getParaToInt());
+        forwardAction("/Admin");
+    }
+    
+    @Before(POST.class)
     public void editor(){
         @SuppressWarnings("deprecation")
         String path = getRequest().getRealPath("/");

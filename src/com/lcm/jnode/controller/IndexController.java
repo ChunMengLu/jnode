@@ -28,30 +28,30 @@ public class IndexController extends Controller{
      * @return void    返回类型
      * @throws
      */
-	public void index() {
-	    Map<String, Object> result = Maps.newHashMap();
+    public void index() {
+        Map<String, Object> result = Maps.newHashMap();
         result.put("type", null);
-	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
-		for(Blog blog: page.getList()){
-			String content = HtmlFilter.getText(blog.getStr("content"));
-			blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
-			blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
-		}
-		setAttr("postsby", false);
-		setAttr("blogPage", page);
-		render("index");
-	}
-	
-	/**
-	 * 文章
-	 * @param     设定文件
-	 * @return void    返回类型
-	 * @throws
-	 */
-	public void blogs() {
-	    Map<String, Object> result = Maps.newHashMap();
-	    result.put("type", 0);
-	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        for(Blog blog: page.getList()){
+            String content = HtmlFilter.getText(blog.getStr("content"));
+            blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
+            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+        }
+        setAttr("postsby", false);
+        setAttr("blogPage", page);
+        render("index");
+    }
+    
+    /**
+     * 文章
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void blogs() {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put("type", 0);
+        Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
         for(Blog blog: page.getList()){
             String content = HtmlFilter.getText(blog.getStr("content"));
             blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
@@ -60,16 +60,16 @@ public class IndexController extends Controller{
         setAttr("blogPage", page);
         setAttr("postsby", "文章");
         render("index");
-	}
-	
-	/**
-	 * 收藏
-	 * @param     设定文件
-	 * @return void    返回类型
-	 * @throws
-	 */
-	public void favorites() {
-	    Map<String, Object> result = Maps.newHashMap();
+    }
+    
+    /**
+     * 收藏
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void favorites() {
+        Map<String, Object> result = Maps.newHashMap();
         result.put("type", 1);
         Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
         for(Blog blog: page.getList()){
@@ -80,18 +80,18 @@ public class IndexController extends Controller{
         setAttr("blogPage", page);
         setAttr("postsby", "收藏");
         render("index");
-	}
-	
-	/**
-	 * 搜索
-	 * @param     设定文件
-	 * @return void    返回类型
-	 * @throws
-	 */
-	public void search() {
-	    Map<String, Object> result = Maps.newHashMap();
+    }
+    
+    /**
+     * 搜索
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void search() {
+        Map<String, Object> result = Maps.newHashMap();
         result.put("s", getPara("s"));
-	    Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
+        Page<Blog> page = Blog.dao.page(getParaToInt(0, 1), 6, result);
         for(Blog blog: page.getList()){
             String content = HtmlFilter.getText(blog.getStr("content"));
             content = content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content;
@@ -101,11 +101,11 @@ public class IndexController extends Controller{
             
         }
         setAttr("blogPage", page);
-	    setAttr("postsby", "搜索");
-	    render("index");
-	}
-	
-	/**
+        setAttr("postsby", "搜索");
+        render("index");
+    }
+    
+    /**
      * 关于
      * @param     设定文件
      * @return void    返回类型

@@ -1,0 +1,43 @@
+.content
+    .header
+        .stats
+            p.stat
+                span.number 53
+                | tickets
+            p.stat
+                span.number 27
+                | tasks
+            p.stat
+                span.number 15
+                | waiting
+        h1.page-title Dashboard
+    ul.breadcrumb
+        li
+            a(href="/admin/blogs") Home
+            span.divider /
+        li.active Dashboard
+    .container-fluid
+        .row-fluid
+            .row-fluid
+                .alert.alert-info
+                    button.close(type="button", data-dismiss="alert") ×
+                    strong Just a quick note:
+                    | Hope you like the theme!
+                .block
+                    a.block-heading(href="#tablewidget", data-toggle="collapse") 博文列表
+                        span.label.label-warning +10
+                    #tablewidget.block-body.collapse.in
+                        table.table
+                            thead
+                                tr
+                                    th First Name
+                                    th Last Name
+                                    th Username
+                            tbody
+                                tr
+                                    td Mark
+                                    td Tompson
+                                    td the_mark7
+                        p
+                            a(href="users.html") 更多...
+                include ../common/_admin_footer

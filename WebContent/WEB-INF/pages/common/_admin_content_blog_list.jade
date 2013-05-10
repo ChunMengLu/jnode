@@ -1,0 +1,62 @@
+.content
+    .header
+        h1.page-title 博文列表
+    ul.breadcrumb
+        li
+            a(href="/admin") 首页
+            span.divider /
+        li.active 博文列表
+    .container-fluid
+        .row-fluid
+            .btn-toolbar
+                button.btn.btn-primary
+                    i.icon-plus
+                    | New User
+                button.btn Import
+                button.btn Export
+                .btn-group
+            .well
+                table.table
+                    thead
+                        tr
+                            th(width="10%") id
+                            th(width="40%") 标题
+                            th(width="10%") 分类
+                            th(width="8%") 状态
+                            th(width="10%") 作者
+                            th(width="14%") 时间
+                            th(width="8%") 操作
+                    tbody
+                        each item in blogPage.getList()
+                            tr
+                                td #{item.id}
+                                td
+                                    a(href="/blog/#{item.id}", title="#{item.title}", target="_blank") #{item.title}
+                                td #{item.blog_type}
+                                td 
+                                    if item.del_status == '0'
+                                        span.badge.badge-success 正常
+                                    if item.del_status == '1'
+                                        span.badge.badge-warning 已删
+                                td #{item.nick_name}
+                                td #{item.update_time} 
+                                td
+                                    a(href="user.html")
+                                        i.icon-pencil
+                                    a(href="#myModal", role="button", data-toggle="modal", style="margin-left: 8px;")
+                                        i.icon-remove
+            include ../common/_admin_page
+            
+            #myModal.modal.small.hide.fade(tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+                .modal-header
+                    button.close(type="button", data-dismiss="modal", aria-hidden="true") ×
+                    h3#myModalLabel Delete Confirmation
+                .modal-body
+                    p.error-text
+                        i.icon-warning-sign.modal-icon
+                        | Are you sure you want to delete the user?
+                .modal-footer
+                    button.btn(data-dismiss="modal", aria-hidden="true") Cancel
+                    button.btn.btn-danger(data-dismiss="modal") Delete
+
+            include ../common/_admin_footer

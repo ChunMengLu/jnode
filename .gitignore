@@ -1,2 +1,4 @@
 /qqconnect.log
 /logs
+/.classpath
+/WebContent/WEB-INF/lib/jetty-server-8.1.8.jar
