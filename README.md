@@ -12,3 +12,8 @@ git clone git://github.com/ChunMengLu/jnode.git
 ```
 
 如果有不明白或问题可联系email：596392912@qq.com Thanks！
+
+
+## License
+
+( The MIT License )
