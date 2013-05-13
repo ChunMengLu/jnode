@@ -89,14 +89,7 @@ jQuery(document).ready(function($){
 });
 
 jQuery(document).ready(function(){
-        // UL = .tabs
-        // Tab contents = .inside
-       var tag_cloud_class = '#tag-cloud'; 
-       
-       //Fix for tag clouds - unexpected height before .hide() 
-       var tag_cloud_height = jQuery('#tag-cloud').height();
-
-       jQuery('.inside ul li:last-child').css('border-bottom','0px') // remove last border-bottom from list in tab conten
+       jQuery('.inside ul li:last-child').css('border-bottom','0px'); // remove last border-bottom from list in tab conten
        jQuery('.tabs').each(function(){
        	jQuery(this).children('li').children('a:first').addClass('selected'); // Add .selected class to first tab on load
        });
@@ -110,9 +103,27 @@ jQuery(document).ready(function(){
             jQuery(this).parent().parent().parent().children('.inside').children('*').hide();
             jQuery('.inside ' + clicked_tab_ref).fadeIn(500);
             evt.preventDefault();
-        })
+        });
     
-})
+});
 
 // Scroll to Top script
-(function(){var $backToTopTxt="返回顶部",$backToTopEle=$('<div class="backToTop"></div>').appendTo($("body")).text($backToTopTxt).attr("title",$backToTopTxt).click(function(){$("html, body").animate({scrollTop:0},120)}),$backToTopFun=function(){var st=$(document).scrollTop(),winh=$(window).height();(st>0)?$backToTopEle.show():$backToTopEle.hide();if(!window.XMLHttpRequest){$backToTopEle.css("top",st+winh-166)}};$(window).bind("scroll",$backToTopFun);$(function(){$backToTopFun()})})();
+(function() {
+	var $backToTopTxt = "返回顶部", $backToTopEle = $(
+			'<div class="backToTop"></div>').appendTo($("body")).text(
+			$backToTopTxt).attr("title", $backToTopTxt).click(function() {
+		$("html, body").animate({
+			scrollTop : 0
+		}, 120);
+	}), $backToTopFun = function() {
+		var st = $(document).scrollTop(), winh = $(window).height();
+		(st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+		if (!window.XMLHttpRequest) {
+			$backToTopEle.css("top", st + winh - 166);
+		}
+	};
+	$(window).bind("scroll", $backToTopFun);
+	$(function() {
+		$backToTopFun();
+	});
+})();
