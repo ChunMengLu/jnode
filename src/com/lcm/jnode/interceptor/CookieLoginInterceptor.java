@@ -30,14 +30,11 @@ public class CookieLoginInterceptor implements Interceptor {
                         String[] data = cookieString.split(":");
                         User user = User.dao.login(data[0], data[1]);
                         controller.setSessionAttr("user", user);
-                        controller.setAttr("user", user);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        } else {
-            controller.setAttr("user", u);
         }
         ai.invoke();
     }

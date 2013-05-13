@@ -24,6 +24,7 @@ import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
 import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.interceptor.SeoInterceptor;
+import com.lcm.jnode.interceptor.SessionInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.ConfigUtil;
@@ -66,6 +67,7 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configInterceptor(Interceptors me) {
 	    me.add(new CookieLoginInterceptor());
+	    me.add(new SessionInterceptor());
 	    me.add(new SeoInterceptor());
 	}
 
@@ -128,6 +130,6 @@ public class JFWebConfig extends JFinalConfig {
      * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此
      */
     public static void main(String[] args) {
-        JFinal.start("WebContent", 80, "/", 5);
+        JFinal.start("WebContent", 8080, "/", 5);
     }
 }
