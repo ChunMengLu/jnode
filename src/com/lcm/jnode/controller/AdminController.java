@@ -9,6 +9,7 @@ import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StringKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
@@ -60,8 +61,7 @@ public class AdminController extends Controller{
     
     @Before(POST.class)
     public void editor(){
-        @SuppressWarnings("deprecation")
-        String path = getRequest().getRealPath("/");
+        String path = PathKit.getWebRootPath();
         try {
             UploadFile file = getFile("imgFile", path + "/uploads" , 1024 * 1024);
             File oldFile = file.getFile();

@@ -65,7 +65,7 @@ public class PathKit {
 	
 	public static String getWebRootPath() {
 		if (webRootPath == null)
-			webRootPath = detectWebRootPath();;
+			webRootPath = detectWebRootPath();
 		return webRootPath;
 	}
 	

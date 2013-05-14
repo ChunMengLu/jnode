@@ -1,37 +1,30 @@
 footer
     .container
-        //.footer-widgets
+        .footer-widgets
             .f-widget.f-widget-1
                 .widget
-                    h3 Lorem ipsum
-                    .textwidget
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-                        | malesuada, nibh quis egestas pellentesque, dui neque sagittis nisl, eget malesuada nunc felis
-                        | sed augue. Aenean tempor nibh sed diam elementum sollicitudin quis in metus. Praesent tincidunt
+                    h3 网站相关
+                    a(href='/rss', title='Rss 订阅') 关于作者
+                    br
+                    br
+                    a(target="_blank", href="http://wpa.qq.com/msgrd?v=3&uin=596392912&site=qq&menu=yes")
+                        img(border="0", src="http://wpa.qq.com/pa?p=2:596392912:51", alt="点击这里给我发消息", title="点击这里给我发消息")
             .f-widget.f-widget-2
                 .widget
-                    h3 Latest Tweets
-                    ul#twitter_update_list_667.tweets
-                        li
-                            p
-                    a.twitter-follow(href='http://twitter.com/mythemeshopteam') Follow on Twitter
-            .f-widget.last
-                .widget
-                    form#searchform.search-form(method='get', action='http://demo.mythemeshop.com/ribbon', _lpchecked='1')
-                        fieldset
-                            input#s(type='text', name='s', value='Search this site...', onblur='if (this.value == "") {this.value = "Search this site...";}', onfocus='if (this.value == "Search this site...") {this.value = "";}')
-                            input(type='submit', value='Search', onclick='if(this.value=="Search this Site...")this.value="";')
-                .widget
-                    h3 Recent Posts
+                    h3 关注我们
                     ul
                         li
-                            a(href='http://demo.mythemeshop.com/ribbon/2012/05/20/how-twitter-works-all-you-need-to-know-about-twitter/', title='Class Aptent Taciti Aociosqu Ad Litora Torquent Per')
-                                | Class Aptent Taciti Aociosqu
-                                | Ad Litora Torquent Per
+                            a(href='/rss', title='Rss 订阅') Rss 订阅
                         li
-                            a(href='http://demo.mythemeshop.com/ribbon/2012/05/16/facebook-buys-lightbox-an-android-photo-sharing-app/', title='Eget Malesuada Nunc Delis Sed Augue Aenean')
-                                | Eget Malesuada Nunc Delis Sed Augue
-                                | Aenean
+                            a(href='https://github.com/ChunMengLu/jnode', title='GitHub') 本站源码
+                        li
+                            a(href='http://weibo.com/lcm596392912', title='新浪微博') 新浪微博
+                        li
+                            a(href='http://t.qq.com/lcm-596392912', title='腾讯微博') 腾讯微博
+            .f-widget.last
+                .widget
+                    h3 官方微信
+                    img(width="120px", height="120px", src="https://res.wx.qq.com/mpres/htmledition/images//mp_qrcode14e99b.png")
         // .footer-widgets
     .copyrights
         // start copyrights
