@@ -23,7 +23,13 @@ script(charset="utf-8")
                 'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
                 'flash', 'media', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
                 'anchor', 'link', 'unlink', '|', 'about', 'fullscreen'
-            ]    
+            ],
+            afterCreate : function() { 
+                this.sync(); 
+            }, 
+            afterBlur:function(){ 
+                this.sync(); 
+            }
         });
     });
 
