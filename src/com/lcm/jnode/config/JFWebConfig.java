@@ -19,6 +19,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.ViewType;
 import com.lcm.jnode.controller.AdminController;
 import com.lcm.jnode.controller.BlogController;
+import com.lcm.jnode.controller.BlogTypeController;
 import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
@@ -26,6 +27,7 @@ import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.interceptor.SeoInterceptor;
 import com.lcm.jnode.interceptor.SessionInterceptor;
 import com.lcm.jnode.model.Blog;
+import com.lcm.jnode.model.BlogType;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.ConfigUtil;
 
@@ -57,6 +59,7 @@ public class JFWebConfig extends JFinalConfig {
 		me.add("/blog", BlogController.class, "/");
 		me.add("/user", UserController.class, "/admin");
 		me.add("/admin", AdminController.class, "/admin");
+		me.add("/blog_type", BlogTypeController.class, "/admin");
 		// 第三方登录
 		me.add("/login", LoginController.class);
 	}
@@ -122,6 +125,7 @@ public class JFWebConfig extends JFinalConfig {
 		// 添加表匹配
 		arp.addMapping("user_info", User.class);
 		arp.addMapping("blog", Blog.class);
+		arp.addMapping("blog_type", BlogType.class);
 		// 添加EhCache
 		me.add(new EhCachePlugin());
 	}
@@ -130,6 +134,6 @@ public class JFWebConfig extends JFinalConfig {
      * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此
      */
     public static void main(String[] args) {
-        JFinal.start("WebContent", 8080, "/", 5);
+        JFinal.start("WebContent", 80, "/", 60);
     }
 }

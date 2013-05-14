@@ -1,5 +1,6 @@
 package com.lcm.jnode.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -91,5 +92,15 @@ public class Blog extends Model<Blog> {
         String select = "SELECT b.*, u.nick_name";
         String sqlOutSelect = "FROM blog AS b ,user_info AS u ORDER BY b.id DESC";
         return dao.paginate(pageNum, pageSize, select, sqlOutSelect.toString());
+    }
+
+    /**
+     * 保存blog实体
+     * @param @param blog    设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public boolean save(Blog blog) {
+        return blog.set("create_time", new Date()).set("update_time", new Date()).save();
     }
 }

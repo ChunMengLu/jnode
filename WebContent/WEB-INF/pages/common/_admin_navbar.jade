@@ -29,13 +29,17 @@
         | 博文管理
     ul#dashboard-menu.nav.nav-list.collapse.in
         li
-            a(href="/admin") 列表
+            a(href="/admin") 首页
         li
-            a(href="/blog/add") 添加
+            a(href="/blog/list") 列表
+
+    a.nav-header(href="#blogtype-menu", data-toggle="collapse")
+        i.icon-list
+        | 博文类型
+    ul#blogtype-menu.nav.nav-list.collapse
         li
-            a(href="/blog/edit") 修改
-        li
-            a(href="/blog/del") 删除
+            a(href="/blog_type/list") 列表
+
     a.nav-header(href="#accounts-menu", data-toggle="collapse")
         i.icon-briefcase
         | 用户管理

@@ -1,7 +1,7 @@
 extends layout
 
 block meta
-    link(rel="stylesheet", href="lib/artDialog/skins/default.css")
+    link(rel="stylesheet", href="/lib/artDialog/skins/default.css")
 
 block content
     .navbar
@@ -34,7 +34,7 @@ block script
             $('form').submit(function(){
                 var dialog = art.dialog();
                 $.post($(this).attr("action")
-                    , {email: $('input[name="email"]').val(), pwd: $('input[name="pwd"]').val(), remember: $('input[name="remember"]').val()}
+                    , $('form').serialize()
                     , function (data){
                         if(data.status === 0) {
                             dialog.content('登录成功！').time(1);

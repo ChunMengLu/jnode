@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    include ../common/_admin_navbar
+    .content
+        .header
+            h1.page-title 博文类型
+        ul.breadcrumb
+            li
+                a(href="/admin") 首页
+                span.divider /
+            li.active 博文类型
+        .container-fluid
+            .row-fluid
+                .btn-toolbar
+                    button.btn.btn-primary
+                        i.icon-plus
+                        | 添加
+                    .btn-group
+                .well
+                    table.table
+                        thead
+                            tr
+                                th(width="10%") id
+                                th(width="10%") 分类名
+                                th(width="8%") 排序号
+                                th(width="10%") 状态
+                                th(width="8%") 操作
+                        tbody
+                            each item in types
+                                tr
+                                    td #{item.id}
+                                    td #{item.type_name}
+                                    td #{item.sort_id}
+                                    td 
+                                        if item.del_status == '0'
+                                            span.badge.badge-success 正常
+                                        if item.del_status == '1'
+                                            span.badge.badge-warning 已删
+                                    td
+                                        a(href="user.html")
+                                            i.icon-pencil
+                                            | 编辑
+                                        a(href="#myModal", role="button", data-toggle="modal", style="margin-left: 8px;")
+                                            i.icon-remove
+                                            | 删除
+                include ../common/_admin_modal
+
+                include ../common/_admin_footer

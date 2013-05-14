@@ -1,0 +1,64 @@
+extends layout
+
+block meta
+    link(rel="stylesheet", href="/lib/artDialog/skins/default.css")
+
+block content
+    include ../common/_admin_navbar
+    .content
+        .header
+            h1.page-title 博文列表
+        ul.breadcrumb
+            li
+                a(href="/admin") 首页
+                span.divider /
+            li.active 博文列表
+        .container-fluid
+            .row-fluid
+                .btn-toolbar
+                    a.btn.btn-primary(href="/blog/add")
+                        i.icon-plus
+                        | 添加
+                    .btn-group
+                .well
+                    table.table
+                        thead
+                            tr
+                                th(width="10%") id
+                                th(width="36%") 标题
+                                th(width="10%") 分类
+                                th(width="8%") 状态
+                                th(width="10%") 作者
+                                th(width="14%") 时间
+                                th(width="14%") 操作
+                        tbody
+                            each item in blogPage.getList()
+                                tr
+                                    td #{item.id}
+                                    td
+                                        a(href="/blog/#{item.id}", title="#{item.title}", target="_blank") #{item.title}
+                                    td #{item.blog_type}
+                                    td 
+                                        if item.del_status == '0'
+                                            span.badge.badge-success 正常
+                                        if item.del_status == '1'
+                                            span.badge.badge-warning 已删
+                                    td #{item.nick_name}
+                                    td #{item.update_time} 
+                                    td
+                                        a(href="/blog/edit/#{item.id}")
+                                            i.icon-pencil
+                                            | 编辑
+                                        a(href="#myModal", role="button", data-toggle="modal", style="margin-left: 8px;")
+                                            i.icon-remove
+                                            | 删除
+                include ../common/_admin_page
+
+                include ../common/_admin_modal
+
+                include ../common/_admin_footer
+
+block script
+    script(src="/lib/artDialog/jquery.artDialog.js")
+    script
+        

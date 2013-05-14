@@ -1,7 +1,6 @@
 package com.lcm.jnode.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -11,11 +10,9 @@ import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.POST;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.StringKit;
-import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.render.JsonRender;
 import com.jfinal.upload.UploadFile;
 import com.lcm.jnode.interceptor.AdminInterceptor;
-import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.DESUtils;
 
@@ -23,13 +20,6 @@ import com.lcm.jnode.utils.DESUtils;
 public class AdminController extends Controller{
     
     public void index() {
-        Page<Blog> page = Blog.dao.adminPage(getParaToInt(0, 1), 8);
-        for(Blog blog: page.getList()){
-            String title = blog.getStr("title");
-            blog.set("title", title != null && title.length() > 40 ? title.substring(0, 37) + "..." : title );
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
-        }
-        setAttr("blogPage", page);
         render("index");
     }
 

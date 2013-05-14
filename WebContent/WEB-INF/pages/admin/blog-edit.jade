@@ -8,15 +8,16 @@ block content
     include ../common/_admin_navbar
     .content
         .header
-            h1.page-title 撰写博文
+            h1.page-title 修改博文
         ul.breadcrumb
             li
                 a(href="/admin") 首页
                 span.divider /
-            li.active 写博
+            li.active 改博
         .container-fluid
             .row-fluid
-                form(action="/blog/save", method="post")
+                form(action="/blog/update", method="post")
+                    input(type="hidden", name="blog.id", value="#{blog.id}")
                     .btn-toolbar
                         button.btn.btn-primary(type="submit")
                             i.icon-save 
@@ -26,13 +27,16 @@ block content
                     .well
                         #myTabContent.tab-content
                             label 标题
-                            input.input-xlarge(type="text", name="blog.title", required="required")
+                            input.input-xlarge(type="text", name="blog.title", value="#{blog.title}", required="required")
                             label 分类
-                            select#DropDownTimezone.input-xlarge(name="blog.blog_type", required="required")
+                            select#DropDownTimezone.input-xlarge(name="blog.blog_type")
                                 each item in types
-                                    option(value="#{item.id}") #{item.type_name}
+                                    if item.id == blog.blog_type
+                                        option(value="#{item.id}", selected="selected") #{item.type_name}
+                                    else
+                                        option(value="#{item.id}") #{item.type_name}
                             label 内容
-                            textarea#editor.input-xlarge(name="blog.content")
+                            textarea#editor.input-xlarge(name="blog.content") !{blog.content}
 
                 include ../common/_admin_modal
                 include ../common/_admin_footer
