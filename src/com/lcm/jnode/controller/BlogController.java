@@ -13,6 +13,7 @@ import com.lcm.jnode.interceptor.SidebarInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.BlogType;
 import com.lcm.jnode.model.User;
+import com.lcm.jnode.utils.DateUtils;
 
 /**
  * 博文控制器
@@ -27,7 +28,7 @@ public class BlogController extends Controller{
 	public void index() {
 	    Blog blog = Blog.dao.findFallById(getParaToInt(0, 1));
 	    blog.set("view_count", blog.getInt("view_count") + 1).update();
-	    blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+	    blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
 	    setAttr("blog", blog);
 	    setAttr("title", blog.getStr("title"));
 	    render("blog");
@@ -44,7 +45,7 @@ public class BlogController extends Controller{
         for(Blog blog: page.getList()){
             String title = blog.getStr("title");
             blog.set("title", title != null && title.length() > 40 ? title.substring(0, 37) + "..." : title );
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
         }
         setAttr("blogPage", page);
         render("admin/blog-list");

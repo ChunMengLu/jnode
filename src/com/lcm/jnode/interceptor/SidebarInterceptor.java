@@ -1,11 +1,11 @@
 package com.lcm.jnode.interceptor;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
 import com.lcm.jnode.model.Blog;
+import com.lcm.jnode.utils.DateUtils;
 
 /**
  * 侧边栏
@@ -19,7 +19,7 @@ public class SidebarInterceptor implements Interceptor {
         ai.invoke();
         List<Blog> lateBlogs = Blog.dao.findLateList();
         for (Blog blog : lateBlogs) {
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
         }
         ai.getController().setAttr("lateBlogs", lateBlogs);
     }

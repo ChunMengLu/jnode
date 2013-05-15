@@ -12,6 +12,7 @@ import com.jfinal.plugin.activerecord.Page;
 import com.lcm.jnode.interceptor.SidebarInterceptor;
 import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
+import com.lcm.jnode.utils.DateUtils;
 import com.lcm.jnode.utils.HtmlFilter;
 
 /**
@@ -35,7 +36,7 @@ public class IndexController extends Controller{
         for(Blog blog: page.getList()){
             String content = HtmlFilter.getText(blog.getStr("content"));
             blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
         }
         setAttr("postsby", false);
         setAttr("blogPage", page);
@@ -55,7 +56,7 @@ public class IndexController extends Controller{
         for(Blog blog: page.getList()){
             String content = HtmlFilter.getText(blog.getStr("content"));
             blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
         }
         setAttr("blogPage", page);
         setAttr("postsby", "文章");
@@ -75,7 +76,7 @@ public class IndexController extends Controller{
         for(Blog blog: page.getList()){
             String content = HtmlFilter.getText(blog.getStr("content"));
             blog.set("content", content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content );
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
         }
         setAttr("blogPage", page);
         setAttr("postsby", "收藏");
@@ -97,7 +98,7 @@ public class IndexController extends Controller{
             content = content != null && content.length() > 400 ? content.substring(0, 397) + "..." : content;
             blog.set("title",  HtmlFilter.markKeywods(getPara("s"), blog.getStr("title")));
             blog.set("content",  HtmlFilter.markKeywods(getPara("s"), content));
-            blog.set("update_time", new SimpleDateFormat("yyyy年 MM月 dd日").format(blog.getTimestamp("update_time")));
+            blog.set("update_time", DateUtils.formatCn(blog.getTimestamp("update_time")));
             
         }
         setAttr("blogPage", page);

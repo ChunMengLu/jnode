@@ -61,7 +61,7 @@ public class AdminController extends Controller{
             oldFile.renameTo(new File(oldFile.getParent() + "/" + newName));
             
             setAttr("error", 0);
-            setAttr("url", "uploads/" + newName);
+            setAttr("url", "/uploads/" + newName);
             render(new JsonRender(new String[]{"error", "url"}).forIE());
         } catch (Exception e) {
             e.printStackTrace();
