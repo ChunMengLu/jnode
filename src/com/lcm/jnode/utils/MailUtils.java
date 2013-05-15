@@ -22,15 +22,11 @@ import de.neuland.jade4j.template.JadeTemplate;
  */
 public class MailUtils {
 	
-	private static String HOST_NAME = "smtp.126.com";
-	private static String USER = "q596392912";
-	private static String PASSWORD = "6693722";
-	private static String FROM = "q596392912@126.com";
 	public static void config(Email email){
-		email.setHostName(HOST_NAME);
-		email.setAuthentication(USER, PASSWORD);
+		email.setHostName(ConfigUtil.get("HOST_NAME"));
+		email.setAuthentication(ConfigUtil.get("USER"), ConfigUtil.get("PASSWORD"));
 		try {
-			email.setFrom(FROM);
+			email.setFrom(ConfigUtil.get("FROM"));
 		} catch (EmailException e) {
 			e.printStackTrace();
 		}
@@ -44,12 +40,12 @@ public class MailUtils {
 	 * @param receiver
 	 * @throws EmailException
 	 */
-	public static void sendSimpleEmail(String subject , String msg , String meilTo){
+	public static void sendSimpleEmail(String subject , String msg , String mailTo){
 		try {
 			HtmlEmail email = new HtmlEmail();
 			config(email);
 			email.setSubject(subject);
-			email.addTo(meilTo);
+			email.addTo(mailTo);
 			email.setMsg(msg);
 			email.send();
 		} catch (EmailException e) {
@@ -67,13 +63,13 @@ public class MailUtils {
 	 * @return void    返回类型
 	 * @throws
 	 */
-	public static void sendTemplateEmail(String subject, String meilTo, Map<String, Object> model, String tempname){
+	public static void sendTemplateEmail(String subject, String mailTo, Map<String, Object> model, String tempname){
 		try {
 			HtmlEmail mail = new HtmlEmail();
 			config(mail);
 			JadeTemplate template = Jade4J.getTemplate(PathKit.getWebRootPath() + "/WEB-INF/mail_template/" + tempname);
 			String html = Jade4J.render(template, model);
-			mail.addTo(meilTo);
+			mail.addTo(mailTo);
 			mail.setSubject(subject);
 			mail.setMsg(html);
 			mail.send();
@@ -90,7 +86,7 @@ public class MailUtils {
 			model.put("user", "大黄");
 			model.put("baseUrl", "http://dreamlu.net/");
 			model.put("verifyUrl", "http://dreamlu.net/");
-			new MailUtils().sendTemplateEmail("测试", "596392912@qq.com", model, "signup_send.jade");
+			sendTemplateEmail("测试", "596392912@qq.com", model, "signup_send.jade");
 			try {
 				Thread.sleep(800);
 			} catch (InterruptedException e) {

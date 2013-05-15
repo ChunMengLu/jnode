@@ -48,7 +48,32 @@ public class AdminController extends Controller{
         renderJson(new String[]{"status"});
     }
 
+    /**
+     * 
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void finish() {
+    	
+    }
     
+    /**
+     * 
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void reset() {
+    	
+    }
+    
+    /**
+     * kindedit 图片上传
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
     @Before(POST.class)
     public void editor(){
         String path = PathKit.getWebRootPath();

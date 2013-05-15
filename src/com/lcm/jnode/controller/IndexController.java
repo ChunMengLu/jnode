@@ -1,5 +1,5 @@
 package com.lcm.jnode.controller;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +14,7 @@ import com.lcm.jnode.model.Blog;
 import com.lcm.jnode.model.User;
 import com.lcm.jnode.utils.DateUtils;
 import com.lcm.jnode.utils.HtmlFilter;
+import com.lcm.jnode.utils.MailUtils;
 
 /**
  * 首页
@@ -130,6 +131,20 @@ public class IndexController extends Controller{
         }else {
             render("admin/sign-in");
         }
+    }
+    
+    /**
+     * 重置密码
+     * @param     设定文件
+     * @return void    返回类型
+     * @throws
+     */
+    public void reset_pwd() {
+    	String mailTo = getPara("email");
+    	Map<String, Object> model = new HashMap<String, Object>();
+        MailUtils.sendTemplateEmail("找回密码-DreamLu.net", mailTo, model, "reset_pwd.jade");
+    	setAttr("status", 0);
+    	renderJson(new String[]{"status"});
     }
     
     /**
