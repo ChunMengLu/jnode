@@ -23,6 +23,7 @@ import com.lcm.jnode.controller.BlogTypeController;
 import com.lcm.jnode.controller.IndexController;
 import com.lcm.jnode.controller.LoginController;
 import com.lcm.jnode.controller.UserController;
+import com.lcm.jnode.handler.CacheHandler;
 import com.lcm.jnode.interceptor.CookieLoginInterceptor;
 import com.lcm.jnode.interceptor.SeoInterceptor;
 import com.lcm.jnode.interceptor.SessionInterceptor;
@@ -79,6 +80,7 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configHandler(Handlers me) {
+		me.add(new CacheHandler());
 	}
 	
 	/**
@@ -134,6 +136,6 @@ public class JFWebConfig extends JFinalConfig {
      * 运行此 main 方法可以启动项目，此main方法可以放置在任意的Class类定义中，不一定要放于此
      */
     public static void main(String[] args) {
-        JFinal.start("WebContent", 80, "/", 60);
+        JFinal.start("WebContent", 8081, "/", 60);
     }
 }
