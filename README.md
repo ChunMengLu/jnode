@@ -2,8 +2,13 @@
 采用的jfinal java web框架 jade4j 模板引擎
 
 demo演示地址：
+### cloudfoundry
 ```
 http://jnode.cloudfoundry.com/
+```
+### bae 百度云
+```
+http://www.dreamlu.net/
 ```
 
 # git and import to eclipse
