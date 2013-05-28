@@ -1,5 +1,5 @@
 # jnode
-采用的jfinal java web框架 jade4j 模板引擎
+采用的jfinal java web框架 jade4j 模板引擎(完善中...)
 
 demo演示地址：
 ### cloudfoundry
@@ -10,6 +10,7 @@ http://jnode.cloudfoundry.com/
 ```
 http://www.dreamlu.net/
 ```
+### 百度云源码链接：`http://git.oschina.net/596392912/jnode`
 
 # git and import to eclipse
 ```
