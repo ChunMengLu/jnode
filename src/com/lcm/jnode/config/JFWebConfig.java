@@ -80,7 +80,14 @@ public class JFWebConfig extends JFinalConfig {
 	 */
 	@Override
 	public void configHandler(Handlers me) {
-		me.add(new CacheHandler());
+	     me.add(new CacheHandler());
+	     DruidStatViewHandler druidViewHandler = new DruidStatViewHandler(
+	            "/admin/druid", new IDruidStatViewAuth() {
+	        public boolean isPermitted(HttpServletRequest request) {
+	            return true;
+	        }
+	     });
+	     me.add(druidViewHandler);	
 	}
 	
 	/**
@@ -89,30 +96,14 @@ public class JFWebConfig extends JFinalConfig {
 	@Override
 	public void configPlugin(Plugins me) {
 		// 配置Druid数据库连接池插件
-		DruidPlugin dp = null;
-		// appfog 数据库连接方式 https://docs.appfog.com/services/mysql
-		String VCAP_SERVICES = System.getenv("VCAP_SERVICES");
-		if(StringKit.notNull(VCAP_SERVICES)){
-			try {
-				JSONObject credentials = new JSONObject(VCAP_SERVICES)
-					.getJSONArray("mysql-5.1").getJSONObject(0).getJSONObject("credentials");
-				
-				StringBuffer jdbcUrl = new StringBuffer("jdbc:mysql://");
-				jdbcUrl.append(credentials.getString("host")).append(":")
-					.append(credentials.getString("port")).append("/")
-					.append(credentials.getString("name")).append("?")
-					.append("characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull");
-				
-				String userName = credentials.getString("username");
-				String password = credentials.getString("password");
-				
-				dp = new DruidPlugin(jdbcUrl.toString(), userName, password);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}else{
-			dp = new DruidPlugin(getProperty("jdbcUrl"),getProperty("user"), getProperty("password"));
-		} 
+		StringBuffer jdbcUrl = new StringBuffer("jdbc:mysql://");
+		jdbcUrl.append(System.getenv("MOPAAS_MYSQL891_HOST")).append(":")
+			.append(System.getenv("MOPAAS_MYSQL891_PORT")).append("/")
+			.append(System.getenv("MOPAAS_MYSQL891_NAME")).append("?")
+			.append("characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull");
+		
+		DruidPlugin dp = new DruidPlugin(jdbcUrl.toString(), System.getenv("MOPAAS_MYSQL891_USERNAME"), System.getenv("MOPAAS_MYSQL891_PASSWORD"));
+		
 		 
 		dp.addFilter(new StatFilter());
 		WallFilter wall = new WallFilter();
